@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<DataSet xmlns='http://tempuri.org/'>
+  <xs:schema id='NewDataSet' xmlns='' xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:msdata='urn:schemas-microsoft-com:xml-msdata'>
+    <xs:element name='NewDataSet' msdata:IsDataSet='true' msdata:UseCurrentLocale='true'>
+      <xs:complexType>
+        <xs:choice minOccurs='0' maxOccurs='unbounded'>
+          <xs:element name='Table'>
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name='ACCOUNT_DESC' type='xs:string' minOccurs='0' />
+                <xs:element name='PAYMENT_SERVICES_id' type='xs:decimal' minOccurs='0' />
+                <xs:element name='PAYMENT_SERVICE_DESC' type='xs:string' minOccurs='0' />
+                <xs:element name='AMOUNT' type='xs:decimal' minOccurs='0' />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <diffgr:diffgram xmlns:msdata='urn:schemas-microsoft-com:xml-msdata' xmlns:diffgr='urn:schemas-microsoft-com:xml-diffgram-v1'>
+    <NewDataSet xmlns=''>
+      <Table diffgr:id='Table1' msdata:rowOrder='0'>
+        <ACCOUNT_DESC>Examination of master's or doctoral theses</ACCOUNT_DESC>
+        <PAYMENT_SERVICES_id>1</PAYMENT_SERVICES_id>
+        <PAYMENT_SERVICE_DESC>فحص عنوان رسائل الماجستير والدكتوراه</PAYMENT_SERVICE_DESC>
+        <AMOUNT>50.000</AMOUNT>
+      </Table>
+    </NewDataSet>
+  </diffgr:diffgram>
+</DataSet>
