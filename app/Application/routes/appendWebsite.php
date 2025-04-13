@@ -78,3 +78,11 @@ Route::post('supervisor_trainee/item' , 'Supervisor_traineeController@store');
 Route::post('supervisor_trainee/item/{id}' , 'Supervisor_traineeController@update');
 Route::get('supervisor_trainee/{id}/delete' , 'Supervisor_traineeController@destroy');
 Route::get('supervisor_trainee/{id}/view' , 'Supervisor_traineeController@getById');
+
+#### evaluation control
+Route::get('evaluation' , 'EvaluationController@index');
+Route::get('evaluation/item/{id?}' , 'EvaluationController@show');
+Route::post('evaluation/item' , 'EvaluationController@store');
+Route::post('evaluation/item/{id}' , 'EvaluationController@update');
+Route::get('evaluation/{id}/delete' , 'EvaluationController@destroy');
+Route::get('evaluation/{id}/view' , 'EvaluationController@getById');
