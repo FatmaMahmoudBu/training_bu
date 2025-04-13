@@ -1,10 +1,7 @@
 <?php
-
-namespace App\Application\Requests\Admin\Supervisor;
-
-use Illuminate\Foundation\Http\FormRequest;
-
-class AddRequestSupervisor extends FormRequest
+ namespace App\Application\Requests\Admin\Supervisor;
+ use Illuminate\Foundation\Http\FormRequest;
+ class AddRequestSupervisor extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,8 +12,7 @@ class AddRequestSupervisor extends FormRequest
     {
         return true;
     }
-
-    /**
+     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -24,11 +20,11 @@ class AddRequestSupervisor extends FormRequest
     public function rules()
     {
         return [
+        	"school_id" => "required|integer",
             "name.*" => "",
-			"email" => "",
-			"phone" => "",
-			"school_id" => "integer",
-			
-        ];
+   "email" => "",
+   "phone" => "",
+   "school_id" => "integer",
+            ];
     }
 }

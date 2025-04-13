@@ -1,11 +1,8 @@
 <?php
-
-namespace App\Application\Requests\Admin\Supervisor;
-
-use Illuminate\Foundation\Http\FormRequest;
+ namespace App\Application\Requests\Admin\Supervisor;
+ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Route;
-
-class UpdateRequestSupervisor extends FormRequest
+ class UpdateRequestSupervisor extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,8 +13,7 @@ class UpdateRequestSupervisor extends FormRequest
     {
         return true;
     }
-
-    /**
+     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -26,11 +22,11 @@ class UpdateRequestSupervisor extends FormRequest
     {
         $id = Route::input('id');
         return [
+        	"school_id" => "required|integer",
             "name.*" => "",
-			"email" => "",
-			"phone" => "",
-			"school_id" => "integer",
-			
-        ];
+   "email" => "",
+   "phone" => "",
+   "school_id" => "integer",
+            ];
     }
 }

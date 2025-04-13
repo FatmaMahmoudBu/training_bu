@@ -1,11 +1,8 @@
 <?php
-
-namespace App\Application\Requests\Website\Trainee;
-
-use Illuminate\Foundation\Http\FormRequest;
+ namespace App\Application\Requests\Website\Trainee;
+ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Route;
-
-class UpdateRequestTrainee extends FormRequest
+ class UpdateRequestTrainee extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,8 +13,7 @@ class UpdateRequestTrainee extends FormRequest
     {
         return true;
     }
-
-    /**
+     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -26,12 +22,12 @@ class UpdateRequestTrainee extends FormRequest
     {
         $id = Route::input('id');
         return [
+        	"school_id" => "required|integer",
             "name.*" => "",
-			"email" => "email",
-			"phone" => "",
-			"national_id" => "",
-			"school_id" => "integer",
-			
-        ];
+   "email" => "email",
+   "phone" => "",
+   "national_id" => "",
+   "school_id" => "integer",
+            ];
     }
 }
