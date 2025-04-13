@@ -62,3 +62,11 @@ Route::post('trainee/item' , 'TraineeController@store');
 Route::post('trainee/item/{id}' , 'TraineeController@update');
 Route::get('trainee/{id}/delete' , 'TraineeController@destroy');
 Route::get('trainee/{id}/view' , 'TraineeController@getById');
+
+#### supervisor control
+Route::get('supervisor' , 'SupervisorController@index');
+Route::get('supervisor/item/{id?}' , 'SupervisorController@show');
+Route::post('supervisor/item' , 'SupervisorController@store');
+Route::post('supervisor/item/{id}' , 'SupervisorController@update');
+Route::get('supervisor/{id}/delete' , 'SupervisorController@destroy');
+Route::get('supervisor/{id}/view' , 'SupervisorController@getById');

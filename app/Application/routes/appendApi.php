@@ -105,3 +105,10 @@ Route::get('trainee/delete/{id}', 'TraineeApi@delete');
 Route::post('trainee/add', 'TraineeApi@add');
 Route::post('trainee/update/{id}', 'TraineeApi@update');
 Route::get('trainee', 'TraineeApi@index');
+
+#supervisor
+Route::get('supervisor/getById/{id}', 'SupervisorApi@getById');
+Route::get('supervisor/delete/{id}', 'SupervisorApi@delete');
+Route::post('supervisor/add', 'SupervisorApi@add');
+Route::post('supervisor/update/{id}', 'SupervisorApi@update');
+Route::get('supervisor', 'SupervisorApi@index');
