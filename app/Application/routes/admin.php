@@ -207,3 +207,11 @@ Route::post('school/item/{id}' , 'SchoolController@update');
 Route::get('school/{id}/delete' , 'SchoolController@destroy');
 Route::get('school/{id}/view' , 'SchoolController@getById');
 Route::get('school/pluck', 'SchoolController@pluck');
+#### trainee control
+Route::get('trainee' , 'TraineeController@index');
+Route::get('trainee/item/{id?}' , 'TraineeController@show');
+Route::post('trainee/item' , 'TraineeController@store');
+Route::post('trainee/item/{id}' , 'TraineeController@update');
+Route::get('trainee/{id}/delete' , 'TraineeController@destroy');
+Route::get('trainee/{id}/view' , 'TraineeController@getById');
+Route::get('trainee/pluck', 'TraineeController@pluck');

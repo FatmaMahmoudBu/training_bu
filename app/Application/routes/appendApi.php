@@ -98,3 +98,10 @@ Route::get('school/delete/{id}', 'SchoolApi@delete');
 Route::post('school/add', 'SchoolApi@add');
 Route::post('school/update/{id}', 'SchoolApi@update');
 Route::get('school', 'SchoolApi@index');
+
+#trainee
+Route::get('trainee/getById/{id}', 'TraineeApi@getById');
+Route::get('trainee/delete/{id}', 'TraineeApi@delete');
+Route::post('trainee/add', 'TraineeApi@add');
+Route::post('trainee/update/{id}', 'TraineeApi@update');
+Route::get('trainee', 'TraineeApi@index');
