@@ -84,3 +84,10 @@ Route::get('workshop/delete/{id}', 'WorkshopApi@delete');
 Route::post('workshop/add', 'WorkshopApi@add');
 Route::post('workshop/update/{id}', 'WorkshopApi@update');
 Route::get('workshop', 'WorkshopApi@index');
+
+#administration
+Route::get('administration/getById/{id}', 'AdministrationApi@getById');
+Route::get('administration/delete/{id}', 'AdministrationApi@delete');
+Route::post('administration/add', 'AdministrationApi@add');
+Route::post('administration/update/{id}', 'AdministrationApi@update');
+Route::get('administration', 'AdministrationApi@index');

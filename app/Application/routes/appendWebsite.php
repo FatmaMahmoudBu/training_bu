@@ -38,3 +38,11 @@ Route::post('workshop/item' , 'WorkshopController@store');
 Route::post('workshop/item/{id}' , 'WorkshopController@update');
 Route::get('workshop/{id}/delete' , 'WorkshopController@destroy');
 //Route::get('workshop/{id}/view' , 'WorkshopController@getById');
+
+#### administration control
+Route::get('administration' , 'AdministrationController@index');
+Route::get('administration/item/{id?}' , 'AdministrationController@show');
+Route::post('administration/item' , 'AdministrationController@store');
+Route::post('administration/item/{id}' , 'AdministrationController@update');
+Route::get('administration/{id}/delete' , 'AdministrationController@destroy');
+Route::get('administration/{id}/view' , 'AdministrationController@getById');
