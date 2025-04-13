@@ -112,3 +112,10 @@ Route::get('supervisor/delete/{id}', 'SupervisorApi@delete');
 Route::post('supervisor/add', 'SupervisorApi@add');
 Route::post('supervisor/update/{id}', 'SupervisorApi@update');
 Route::get('supervisor', 'SupervisorApi@index');
+
+#supervisor_trainee
+Route::get('supervisor_trainee/getById/{id}', 'Supervisor_traineeApi@getById');
+Route::get('supervisor_trainee/delete/{id}', 'Supervisor_traineeApi@delete');
+Route::post('supervisor_trainee/add', 'Supervisor_traineeApi@add');
+Route::post('supervisor_trainee/update/{id}', 'Supervisor_traineeApi@update');
+Route::get('supervisor_trainee', 'Supervisor_traineeApi@index');
