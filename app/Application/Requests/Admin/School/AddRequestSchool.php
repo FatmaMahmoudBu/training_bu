@@ -1,10 +1,7 @@
 <?php
-
-namespace App\Application\Requests\Admin\School;
-
-use Illuminate\Foundation\Http\FormRequest;
-
-class AddRequestSchool extends FormRequest
+ namespace App\Application\Requests\Admin\School;
+ use Illuminate\Foundation\Http\FormRequest;
+ class AddRequestSchool extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,8 +12,7 @@ class AddRequestSchool extends FormRequest
     {
         return true;
     }
-
-    /**
+     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -24,10 +20,10 @@ class AddRequestSchool extends FormRequest
     public function rules()
     {
         return [
+        	"administration_id" => "required|integer",
             "name.*" => "",
-			"address.*" => "",
-			"administration_id" => "integer",
-			
-        ];
+   "address.*" => "",
+   "administration_id" => "integer",
+            ];
     }
 }
