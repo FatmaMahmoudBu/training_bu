@@ -91,3 +91,10 @@ Route::get('administration/delete/{id}', 'AdministrationApi@delete');
 Route::post('administration/add', 'AdministrationApi@add');
 Route::post('administration/update/{id}', 'AdministrationApi@update');
 Route::get('administration', 'AdministrationApi@index');
+
+#school
+Route::get('school/getById/{id}', 'SchoolApi@getById');
+Route::get('school/delete/{id}', 'SchoolApi@delete');
+Route::post('school/add', 'SchoolApi@add');
+Route::post('school/update/{id}', 'SchoolApi@update');
+Route::get('school', 'SchoolApi@index');

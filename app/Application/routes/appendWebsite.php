@@ -46,3 +46,11 @@ Route::post('administration/item' , 'AdministrationController@store');
 Route::post('administration/item/{id}' , 'AdministrationController@update');
 Route::get('administration/{id}/delete' , 'AdministrationController@destroy');
 Route::get('administration/{id}/view' , 'AdministrationController@getById');
+
+#### school control
+Route::get('school' , 'SchoolController@index');
+Route::get('school/item/{id?}' , 'SchoolController@show');
+Route::post('school/item' , 'SchoolController@store');
+Route::post('school/item/{id}' , 'SchoolController@update');
+Route::get('school/{id}/delete' , 'SchoolController@destroy');
+Route::get('school/{id}/view' , 'SchoolController@getById');
