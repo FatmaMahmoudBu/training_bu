@@ -3,7 +3,7 @@
 namespace App\Application\DataTables;
 
 use App\Application\Model\Supervisor_trainee;
-use Yajra\Datatables\Services\DataTable;
+use Yajra\DataTables\Services\DataTable;use Datatables;use Illuminate\Http\JsonResponse;
 
 class Supervisor_traineesDataTable extends DataTable
 {
@@ -12,15 +12,16 @@ class Supervisor_traineesDataTable extends DataTable
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function ajax()
+    public function ajax():JsonResponse
     {
-        return $this->datatables
-             ->eloquent($this->query())
+        return
+             Datatables::of($this->query())
               ->addColumn('id', 'admin.supervisor_trainee.buttons.id')
              ->addColumn('edit', 'admin.supervisor_trainee.buttons.edit')
              ->addColumn('delete', 'admin.supervisor_trainee.buttons.delete')
              ->addColumn('view', 'admin.supervisor_trainee.buttons.view')
              /*->addColumn('name', 'admin.supervisor_trainee.buttons.langcol')*/
+             ->rawColumns(['id','name', 'view', 'edit', 'delete'])
              ->make(true);
     }
     /**
@@ -119,7 +120,7 @@ class Supervisor_traineesDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename()
+    protected function filename(): string
     {
         return 'Supervisor_traineedatatables_' . time();
     }
