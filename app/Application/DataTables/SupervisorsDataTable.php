@@ -3,7 +3,7 @@
 namespace App\Application\DataTables;
 
 use App\Application\Model\Supervisor;
-use Yajra\Datatables\Services\DataTable;
+use Yajra\DataTables\Services\DataTable;use Datatables;use Illuminate\Http\JsonResponse;
 
 class SupervisorsDataTable extends DataTable
 {
@@ -12,15 +12,16 @@ class SupervisorsDataTable extends DataTable
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function ajax()
+    public function ajax():JsonResponse
     {
-        return $this->datatables
-             ->eloquent($this->query())
+        return
+             Datatables::of($this->query())
               ->addColumn('id', 'admin.supervisor.buttons.id')
              ->addColumn('edit', 'admin.supervisor.buttons.edit')
              ->addColumn('delete', 'admin.supervisor.buttons.delete')
              ->addColumn('view', 'admin.supervisor.buttons.view')
              /*->addColumn('name', 'admin.supervisor.buttons.langcol')*/
+             ->rawColumns(['id','name', 'view', 'edit', 'delete'])
              ->make(true);
     }
     /**
@@ -129,7 +130,7 @@ class SupervisorsDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename()
+    protected function filename(): string
     {
         return 'Supervisordatatables_' . time();
     }

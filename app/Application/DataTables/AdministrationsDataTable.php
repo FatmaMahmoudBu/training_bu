@@ -3,7 +3,7 @@
 namespace App\Application\DataTables;
 
 use App\Application\Model\Administration;
-use Yajra\Datatables\Services\DataTable;
+use Yajra\DataTables\Services\DataTable;use Datatables;use Illuminate\Http\JsonResponse;
 
 class AdministrationsDataTable extends DataTable
 {
@@ -12,15 +12,16 @@ class AdministrationsDataTable extends DataTable
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function ajax()
+    public function ajax():JsonResponse
     {
-        return $this->datatables
-             ->eloquent($this->query())
+        return
+             Datatables::of($this->query())
               ->addColumn('id', 'admin.administration.buttons.id')
              ->addColumn('edit', 'admin.administration.buttons.edit')
              ->addColumn('delete', 'admin.administration.buttons.delete')
              ->addColumn('view', 'admin.administration.buttons.view')
              /*->addColumn('name', 'admin.administration.buttons.langcol')*/
+             ->rawColumns(['id','name', 'view', 'edit', 'delete'])
              ->make(true);
     }
     /**
@@ -121,7 +122,7 @@ class AdministrationsDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename()
+    protected function filename(): string
     {
         return 'Administrationdatatables_' . time();
     }

@@ -3,7 +3,7 @@
 namespace App\Application\DataTables;
 
 use App\Application\Model\Evaluation;
-use Yajra\Datatables\Services\DataTable;
+use Yajra\DataTables\Services\DataTable;use Datatables;use Illuminate\Http\JsonResponse;
 
 class EvaluationsDataTable extends DataTable
 {
@@ -12,15 +12,16 @@ class EvaluationsDataTable extends DataTable
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function ajax()
+    public function ajax():JsonResponse
     {
-        return $this->datatables
-             ->eloquent($this->query())
+        return
+             Datatables::of($this->query())
               ->addColumn('id', 'admin.evaluation.buttons.id')
              ->addColumn('edit', 'admin.evaluation.buttons.edit')
              ->addColumn('delete', 'admin.evaluation.buttons.delete')
              ->addColumn('view', 'admin.evaluation.buttons.view')
              /*->addColumn('name', 'admin.evaluation.buttons.langcol')*/
+             ->rawColumns(['id','name', 'view', 'edit', 'delete'])
              ->make(true);
     }
     /**
@@ -127,7 +128,7 @@ class EvaluationsDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename()
+    protected function filename(): string
     {
         return 'Evaluationdatatables_' . time();
     }
