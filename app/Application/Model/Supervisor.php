@@ -4,9 +4,12 @@
  class Supervisor extends Model
 {
    public $table = "supervisor";
-   public function school(){
-		return $this->belongsTo(School::class, "school_id");
+   public function supervisor_trainee(){
+		return $this->hasMany(Supervisor_trainee::class, "supervisor_id");
 		}
+   public function school(){
+  return $this->belongsTo(School::class, "school_id");
+  }
      protected $fillable = [
    'school_id',
         'name','email','phone','school_id'
