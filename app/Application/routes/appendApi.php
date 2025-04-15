@@ -126,3 +126,10 @@ Route::get('evaluation/delete/{id}', 'EvaluationApi@delete');
 Route::post('evaluation/add', 'EvaluationApi@add');
 Route::post('evaluation/update/{id}', 'EvaluationApi@update');
 Route::get('evaluation', 'EvaluationApi@index');
+
+#attendance
+Route::get('attendance/getById/{id}', 'AttendanceApi@getById');
+Route::get('attendance/delete/{id}', 'AttendanceApi@delete');
+Route::post('attendance/add', 'AttendanceApi@add');
+Route::post('attendance/update/{id}', 'AttendanceApi@update');
+Route::get('attendance', 'AttendanceApi@index');

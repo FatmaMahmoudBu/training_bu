@@ -86,3 +86,11 @@ Route::post('evaluation/item' , 'EvaluationController@store');
 Route::post('evaluation/item/{id}' , 'EvaluationController@update');
 Route::get('evaluation/{id}/delete' , 'EvaluationController@destroy');
 Route::get('evaluation/{id}/view' , 'EvaluationController@getById');
+
+#### attendance control
+Route::get('attendance' , 'AttendanceController@index');
+Route::get('attendance/item/{id?}' , 'AttendanceController@show');
+Route::post('attendance/item' , 'AttendanceController@store');
+Route::post('attendance/item/{id}' , 'AttendanceController@update');
+Route::get('attendance/{id}/delete' , 'AttendanceController@destroy');
+Route::get('attendance/{id}/view' , 'AttendanceController@getById');
