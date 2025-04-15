@@ -94,3 +94,11 @@ Route::post('attendance/item' , 'AttendanceController@store');
 Route::post('attendance/item/{id}' , 'AttendanceController@update');
 Route::get('attendance/{id}/delete' , 'AttendanceController@destroy');
 Route::get('attendance/{id}/view' , 'AttendanceController@getById');
+
+#### assignment control
+Route::get('assignment' , 'AssignmentController@index');
+Route::get('assignment/item/{id?}' , 'AssignmentController@show');
+Route::post('assignment/item' , 'AssignmentController@store');
+Route::post('assignment/item/{id}' , 'AssignmentController@update');
+Route::get('assignment/{id}/delete' , 'AssignmentController@destroy');
+Route::get('assignment/{id}/view' , 'AssignmentController@getById');

@@ -133,3 +133,10 @@ Route::get('attendance/delete/{id}', 'AttendanceApi@delete');
 Route::post('attendance/add', 'AttendanceApi@add');
 Route::post('attendance/update/{id}', 'AttendanceApi@update');
 Route::get('attendance', 'AttendanceApi@index');
+
+#assignment
+Route::get('assignment/getById/{id}', 'AssignmentApi@getById');
+Route::get('assignment/delete/{id}', 'AssignmentApi@delete');
+Route::post('assignment/add', 'AssignmentApi@add');
+Route::post('assignment/update/{id}', 'AssignmentApi@update');
+Route::get('assignment', 'AssignmentApi@index');

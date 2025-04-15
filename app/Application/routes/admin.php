@@ -247,3 +247,11 @@ Route::post('attendance/item/{id}' , 'AttendanceController@update');
 Route::get('attendance/{id}/delete' , 'AttendanceController@destroy');
 Route::get('attendance/{id}/view' , 'AttendanceController@getById');
 Route::get('attendance/pluck', 'AttendanceController@pluck');
+#### assignment control
+Route::get('assignment' , 'AssignmentController@index');
+Route::get('assignment/item/{id?}' , 'AssignmentController@show');
+Route::post('assignment/item' , 'AssignmentController@store');
+Route::post('assignment/item/{id}' , 'AssignmentController@update');
+Route::get('assignment/{id}/delete' , 'AssignmentController@destroy');
+Route::get('assignment/{id}/view' , 'AssignmentController@getById');
+Route::get('assignment/pluck', 'AssignmentController@pluck');
