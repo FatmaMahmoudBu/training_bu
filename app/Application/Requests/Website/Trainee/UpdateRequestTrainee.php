@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
             "name.*" => "",
    "email" => "email",
    "phone" => "",
+   "image" => "image",
    "national_id" => "",
    "school_id" => "integer",
             ];

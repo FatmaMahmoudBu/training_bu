@@ -12,7 +12,7 @@
   }
      protected $fillable = [
    'school_id',
-        'name','email','phone','national_id','school_id'
+        'name','email','phone','image','national_id','school_id'
    ];
   public function getNameLangAttribute(){
   return is_json($this->name) && is_object(json_decode($this->name)) ?  json_decode($this->name)->{getCurrentLang()}  : $this->name;

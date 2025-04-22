@@ -7,6 +7,7 @@
         return [
         	"school_id" => "required|integer",
             "name" => "email",
+			"image" => "image",
    "school_id" => "integer",
             ];
     }

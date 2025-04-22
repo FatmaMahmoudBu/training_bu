@@ -12,6 +12,7 @@ class ApiUpdateRequestAdministration
         return [
             "name" => "",
 			"address" => "",
+			"image" => "image",
 			
         ];
     }

@@ -26,6 +26,7 @@ class AddRequestAdministration extends FormRequest
         return [
             "name.*" => "",
 			"address.*" => "",
+			"image" => "image",
 			
         ];
     }

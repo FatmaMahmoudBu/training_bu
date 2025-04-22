@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Apr 07, 2025 at 12:22 PM
--- Server version: 8.0.41
--- PHP Version: 8.3.19
+-- Host: localhost
+-- Generation Time: Apr 22, 2025 at 07:59 PM
+-- Server version: 8.0.33-0ubuntu0.22.10.2
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,8 +18,62 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `msscbuedu_db`
+-- Database: `training_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `administration`
+--
+
+CREATE TABLE `administration` (
+  `id` int UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` text COLLATE utf8mb4_unicode_ci,
+  `image` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `administration`
+--
+
+INSERT INTO `administration` (`id`, `name`, `address`, `image`, `created_at`, `updated_at`) VALUES
+(3, '{\"ar\":null,\"en\":\"تت\"}', '{\"ar\":\"تتت\",\"en\":null}', '67101_1745340143.png', '2025-04-22 14:38:49', '2025-04-22 14:42:23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assignment`
+--
+
+CREATE TABLE `assignment` (
+  `id` int UNSIGNED NOT NULL,
+  `trainee_id` int DEFAULT NULL,
+  `supervisor_id` int DEFAULT NULL,
+  `report_path` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attendance`
+--
+
+CREATE TABLE `attendance` (
+  `id` int UNSIGNED NOT NULL,
+  `trainee_id` int DEFAULT NULL,
+  `supervisor_id` int DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `status` tinyint DEFAULT NULL,
+  `notes` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -73,7 +127,15 @@ INSERT INTO `command` (`id`, `name`, `options`, `command`, `created_at`, `update
 (44, 'Slider', 'image:string:image:false,title:string::false,text:longText::false,date:date:date:false,body:longText::false,gallery:string::false,video:string::false,status:tinyInteger:boolean:false,presentation:text::false', 'laraflat:admin_model', '2024-04-05 17:37:52', '2024-04-05 17:37:52'),
 (45, 'Slider', 'image:string:image:false,title:string::true,text:longText::true,date:date:date:false,body:text::true,gallery:string::true,video:string::false,status:tinyInteger:boolean:true,presentation:text::true', 'laraflat:admin_model', '2024-04-06 08:28:15', '2024-04-06 08:28:15'),
 (46, 'Team', 'name:string::true,position:string::true,type:tinyInteger::true,image:string:image:false,faculty_id:integer::false', 'laraflat:admin_model', '2024-04-08 06:06:10', '2024-04-08 06:06:10'),
-(47, 'Workshop', 'title:text:required:true,description:longText::true', 'laraflat:admin_model', '2024-09-29 07:15:53', '2024-09-29 07:15:53');
+(47, 'Workshop', 'title:text:required:true,description:longText::true', 'laraflat:admin_model', '2024-09-29 07:15:53', '2024-09-29 07:15:53'),
+(48, 'Administration', 'name:string::true,address:text::true', 'laraflat:admin_model', '2025-04-12 16:47:44', '2025-04-12 16:47:44'),
+(49, 'School', 'name:string::true,address:text::true,administration_id:integer:integer:false', 'laraflat:admin_model', '2025-04-13 07:29:48', '2025-04-13 07:29:48'),
+(50, 'Trainee', 'name:string::true,email:string:email:false,phone:string::false,national_id:string::false,school_id:integer:integer:false', 'laraflat:admin_model', '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(51, 'Supervisor', 'name:string::true,email:string::false,phone:string::false,school_id:integer:integer:false', 'laraflat:admin_model', '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(52, 'Supervisor_trainee', 'supervisor_id:integer:integer:false,trainee_id:integer:integer:false', 'laraflat:admin_model', '2025-04-13 07:41:57', '2025-04-13 07:41:57'),
+(53, 'Evaluation', 'trainee_id:integer:integer:false,supervisor_id:integer:integer:false,comments:text::true,score:integer:integer:false', 'laraflat:admin_model', '2025-04-13 07:47:28', '2025-04-13 07:47:28'),
+(54, 'Attendance', 'trainee_id:integer:integer:false,supervisor_id:integer:integer:false,date:date:date:false,status:tinyInteger::false,notes:text::true', 'laraflat:admin_model', '2025-04-15 14:59:16', '2025-04-15 14:59:16'),
+(55, 'Assignment', 'trainee_id:integer:integer:false,supervisor_id:integer:integer:false,report_path:string::false', 'laraflat:admin_model', '2025-04-15 15:03:20', '2025-04-15 15:03:20');
 
 -- --------------------------------------------------------
 
@@ -305,6 +367,22 @@ INSERT INTO `department` (`id`, `name`, `created_at`, `updated_at`, `faculty_id`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `evaluation`
+--
+
+CREATE TABLE `evaluation` (
+  `id` int UNSIGNED NOT NULL,
+  `trainee_id` int DEFAULT NULL,
+  `supervisor_id` int DEFAULT NULL,
+  `comments` text COLLATE utf8mb4_unicode_ci,
+  `score` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `faculty`
 --
 
@@ -468,18 +546,24 @@ INSERT INTO `items` (`id`, `name`, `link`, `type`, `icon`, `parent_id`, `order`,
 (44, '{\"ar\":\"الأقسام\",\"en\":\"Department\"}', '/admin/department', 'self', '<i class=\"material-icons\">control_point</i>', 0, 8, '[\"App\\\\Application\\\\Controllers\\\\Admin\\\\DepartmentController\"]', 1, '2021-05-25 22:32:39', '2022-05-23 06:10:02'),
 (52, '{\"ar\":\"طلبات الفحص\",\"en\":\"Inquests\"}', '/admin/inquest', 'self', '<i class=\"material-icons\">control_point</i>', 0, 9, '[\"App\\\\Application\\\\Controllers\\\\Admin\\\\InquestController\"]', 1, '2021-05-25 23:09:36', '2022-05-23 06:10:02'),
 (54, '{\"ar\":\"الأخبار\",\"en\":\"News\"}', '/admin/news', 'self', '<i class=\"material-icons\">control_point</i>', 0, 6, '[\"App\\\\Application\\\\Controllers\\\\Admin\\\\NewsController\"]', 1, '2022-03-04 11:12:53', '2022-05-23 06:10:02'),
-(55, '{\"en\":\"Center services\",\"ar\":\"الخدمات\"}', '/page/services', 'self', NULL, 0, 5, '[\"App\\\\Application\\\\Controllers\\\\Website\\\\HomeController\"]', 3, '2022-03-04 11:12:53', '2024-09-05 08:07:39'),
 (97, '{\"en\":\"Image\",\"ar\":\"الصور\"}', '/admin/image', '', '<i class=\"material-icons\">control_point</i>', 0, 39, '[\"App\\\\Application\\\\Controllers\\\\Admin\\\\ImageController\"]', 1, '2023-10-28 14:17:02', '2023-10-28 14:17:02'),
 (99, '{\"en\":\"Gallery\",\"ar\":\"معرض الصور\"}', '/admin/gallery', '', '<i class=\"material-icons\">control_point</i>', 0, 39, '[\"App\\\\Application\\\\Controllers\\\\Admin\\\\GalleryController\"]', 1, '2023-10-28 14:44:54', '2023-10-28 14:44:54'),
-(107, '{\"en\":\"About the center\",\"ar\":\"عن المركز\"}', '/page/about', 'self', NULL, 0, 1, '[\"App\\\\Application\\\\Controllers\\\\Website\\\\HomeController\"]', 3, '2024-03-14 11:45:54', '2024-09-05 08:07:39'),
-(119, '{\"en\":\"Contact us\",\"ar\":\"اتصل بنا\"}', '/page/contact', 'blank', NULL, 0, 6, '[\"App\\\\Application\\\\Controllers\\\\Website\\\\HomeController\"]', 3, '2024-03-14 12:22:06', '2024-09-05 08:07:39'),
 (120, '{\"en\":\"Home\",\"ar\":\"الرئيسية\"}', '/', 'self', NULL, 0, 0, '[null]', 3, '2024-04-04 11:49:15', '2024-09-05 08:07:39'),
 (126, '{\"en\":\"Slider\",\"ar\":\"Slider\"}', '/admin/slider', '', '<i class=\"material-icons\">control_point</i>', 0, 40, '[\"App\\\\Application\\\\Controllers\\\\Admin\\\\SliderController\"]', 1, '2024-04-06 08:28:15', '2024-04-06 08:28:15'),
 (127, '{\"en\":\"Team\",\"ar\":\"Team\"}', '/admin/team', '', '<i class=\"material-icons\">control_point</i>', 0, 51, '[\"App\\\\Application\\\\Controllers\\\\Admin\\\\TeamController\"]', 1, '2024-04-08 06:06:10', '2024-04-08 06:06:10'),
-(164, '{\"en\":\"Organizational structure\",\"ar\":\"الهيكل التنظيمي\"}', '/page/organizational_structure', 'self', NULL, 0, 3, '[\"App\\\\Application\\\\Controllers\\\\Website\\\\HomeController\"]', 3, '2024-06-24 05:15:55', '2024-09-05 08:07:39'),
-(166, '{\"en\":\"Courses&Workshops\",\"ar\":\"الورش والدورات\"}', 'workshop', 'blank', NULL, 0, 4, '[\"App\\\\Application\\\\Controllers\\\\Website\\\\HomeController\"]', 3, '2024-09-05 06:35:02', '2024-09-30 05:42:20'),
-(167, '{\"en\":\"What is simulation?\",\"ar\":\"ماهى المحاكاة؟\"}', '/page/simulation', 'blank', NULL, 0, 2, '[\"App\\\\Application\\\\Controllers\\\\Website\\\\HomeController\"]', 3, '2024-09-05 07:57:56', '2024-09-05 08:07:39'),
-(168, '{\"en\":\"Workshop\",\"ar\":\"Workshop\"}', '/admin/workshop', '', '<i class=\"material-icons\">control_point</i>', 0, 35, '[\"App\\\\Application\\\\Controllers\\\\Admin\\\\WorkshopController\"]', 1, '2024-09-29 07:15:53', '2024-09-29 07:15:53');
+(168, '{\"en\":\"Workshop\",\"ar\":\"Workshop\"}', '/admin/workshop', '', '<i class=\"material-icons\">control_point</i>', 0, 35, '[\"App\\\\Application\\\\Controllers\\\\Admin\\\\WorkshopController\"]', 1, '2024-09-29 07:15:53', '2024-09-29 07:15:53'),
+(170, '{\"en\":\"Administration\",\"ar\":\"Administration\"}', '/admin/administration', '', '<i class=\"material-icons\">control_point</i>', 0, 36, '[\"App\\\\Application\\\\Controllers\\\\Admin\\\\AdministrationController\"]', 1, '2025-04-12 16:47:45', '2025-04-12 16:47:45'),
+(172, '{\"en\":\"School\",\"ar\":\"School\"}', '/admin/school', '', '<i class=\"material-icons\">control_point</i>', 0, 38, '[\"App\\\\Application\\\\Controllers\\\\Admin\\\\SchoolController\"]', 1, '2025-04-13 07:29:49', '2025-04-13 07:29:49'),
+(173, '{\"ar\":\"المدارس\",\"en\":\"School\"}', 'school', 'self', '<i class=\"fa fa-plus-square-o\" aria-hidden=\"true\"></i>', 0, 39, '[\"App\\\\Application\\\\Controllers\\\\Admin\\\\SchoolController\"]', 3, '2025-04-13 07:29:49', '2025-04-22 11:43:04'),
+(174, '{\"en\":\"Trainee\",\"ar\":\"Trainee\"}', '/admin/trainee', '', '<i class=\"material-icons\">control_point</i>', 0, 40, '[\"App\\\\Application\\\\Controllers\\\\Admin\\\\TraineeController\"]', 1, '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(175, '{\"ar\":\"المتدربون\",\"en\":\"Trainee\"}', 'trainee', 'self', '<i class=\"fa fa-plus-square-o\" aria-hidden=\"true\"></i>', 0, 41, '[\"App\\\\Application\\\\Controllers\\\\Admin\\\\TraineeController\"]', 3, '2025-04-13 07:36:14', '2025-04-22 14:43:16'),
+(176, '{\"en\":\"Supervisor\",\"ar\":\"Supervisor\"}', '/admin/supervisor', '', '<i class=\"material-icons\">control_point</i>', 0, 42, '[\"App\\\\Application\\\\Controllers\\\\Admin\\\\SupervisorController\"]', 1, '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(177, '{\"ar\":\"المشرفون\",\"en\":\"Supervisor\"}', 'supervisor', 'self', '<i class=\"fa fa-plus-square-o\" aria-hidden=\"true\"></i>', 0, 43, '[\"App\\\\Application\\\\Controllers\\\\Admin\\\\SupervisorController\"]', 3, '2025-04-13 07:38:43', '2025-04-22 11:43:44'),
+(178, '{\"en\":\"Supervisor_trainee\",\"ar\":\"Supervisor_trainee\"}', '/admin/supervisor_trainee', '', '<i class=\"material-icons\">control_point</i>', 0, 44, '[\"App\\\\Application\\\\Controllers\\\\Admin\\\\Supervisor_traineeController\"]', 1, '2025-04-13 07:41:58', '2025-04-13 07:41:58'),
+(180, '{\"en\":\"Evaluation\",\"ar\":\"Evaluation\"}', '/admin/evaluation', '', '<i class=\"material-icons\">control_point</i>', 0, 46, '[\"App\\\\Application\\\\Controllers\\\\Admin\\\\EvaluationController\"]', 1, '2025-04-13 07:47:29', '2025-04-13 07:47:29'),
+(182, '{\"en\":\"Attendance\",\"ar\":\"Attendance\"}', '/admin/attendance', '', '<i class=\"material-icons\">control_point</i>', 0, 48, '[\"App\\\\Application\\\\Controllers\\\\Admin\\\\AttendanceController\"]', 1, '2025-04-15 14:59:17', '2025-04-15 14:59:17'),
+(184, '{\"en\":\"Assignment\",\"ar\":\"Assignment\"}', '/admin/assignment', '', '<i class=\"material-icons\">control_point</i>', 0, 50, '[\"App\\\\Application\\\\Controllers\\\\Admin\\\\AssignmentController\"]', 1, '2025-04-15 15:03:20', '2025-04-15 15:03:20'),
+(186, '{\"ar\":\"الإدارات التعليمية\",\"en\":\"Supervisor\"}', 'administration', 'self', NULL, 0, 0, '[\"App\\\\Application\\\\Controllers\\\\Website\\\\HomeController\"]', 3, '2025-04-22 11:44:35', '2025-04-22 11:44:35');
 
 -- --------------------------------------------------------
 
@@ -24642,7 +24726,71 @@ INSERT INTO `logs` (`id`, `action`, `model`, `status`, `messages`, `user_id`, `c
 (24049, 'Visit Edit Page', 'page', 'Success', '{\"Edit Id\":[63]}', 0, '2025-04-05 21:00:33', '2025-04-05 21:00:33'),
 (24050, 'Visit Edit Page', 'workshop', 'Success', '{\"Edit Id\":[\"1\"]}', 0, '2025-04-06 01:48:50', '2025-04-06 01:48:50'),
 (24051, 'Visit Edit Page', 'page', 'Success', '{\"Edit Id\":[63]}', 0, '2025-04-06 17:03:56', '2025-04-06 17:03:56'),
-(24052, 'Visit Edit Page', 'workshop', 'Success', '{\"Edit Id\":[\"1\"]}', 0, '2025-04-07 03:48:06', '2025-04-07 03:48:06');
+(24052, 'Visit Edit Page', 'workshop', 'Success', '{\"Edit Id\":[\"1\"]}', 0, '2025-04-07 03:48:06', '2025-04-07 03:48:06'),
+(24053, 'Visit Create Page', 'administration', 'Success', '', 7, '2025-04-13 08:16:59', '2025-04-13 08:16:59'),
+(24054, 'Create', 'administration', 'Success', '{\"New id\":[1]}', 7, '2025-04-13 08:17:02', '2025-04-13 08:17:02'),
+(24055, 'Visit Create Page', 'administration', 'Success', '', 7, '2025-04-13 08:17:12', '2025-04-13 08:17:12'),
+(24056, 'Create', 'administration', 'Success', '{\"New id\":[2]}', 7, '2025-04-13 08:17:16', '2025-04-13 08:17:16'),
+(24057, 'Visit Edit Page', 'administration', 'Success', '{\"Edit Id\":[\"1\"]}', 7, '2025-04-13 08:17:44', '2025-04-13 08:17:44'),
+(24058, 'Update', 'administration', 'Success', '{\"Updated id\":[\"1\"]}', 7, '2025-04-13 08:17:49', '2025-04-13 08:17:49'),
+(24059, 'Visit Edit Page', 'administration', 'Success', '{\"Edit Id\":[\"1\"]}', 7, '2025-04-13 08:17:49', '2025-04-13 08:17:49'),
+(24060, 'Delete', 'administration', 'Success', '{\"Updated id\":[\"1\"]}', 7, '2025-04-13 08:18:01', '2025-04-13 08:18:01'),
+(24061, 'Delete', 'administration', 'Success', '{\"Updated id\":[\"2\"]}', 7, '2025-04-13 08:18:06', '2025-04-13 08:18:06'),
+(24062, 'Visit Create Page', 'school', 'Success', '', 7, '2025-04-13 08:22:39', '2025-04-13 08:22:39'),
+(24063, 'Visit Create Page', 'school', 'Success', '', 7, '2025-04-13 08:22:44', '2025-04-13 08:22:44'),
+(24064, 'Create', 'school', 'Success', '{\"New id\":[1]}', 7, '2025-04-13 08:22:49', '2025-04-13 08:22:49'),
+(24065, 'Delete', 'school', 'Success', '{\"Updated id\":[\"1\"]}', 7, '2025-04-13 08:23:05', '2025-04-13 08:23:05'),
+(24066, 'Visit Create Page', 'trainee', 'Success', '', 7, '2025-04-13 08:24:53', '2025-04-13 08:24:53'),
+(24067, 'Visit Create Page', 'trainee', 'Success', '', 7, '2025-04-13 08:25:04', '2025-04-13 08:25:04'),
+(24068, 'Create', 'trainee', 'Success', '{\"New id\":[1]}', 7, '2025-04-13 08:25:08', '2025-04-13 08:25:08'),
+(24069, 'Delete', 'trainee', 'Success', '{\"Updated id\":[\"1\"]}', 7, '2025-04-13 08:25:12', '2025-04-13 08:25:12'),
+(24070, 'Visit Create Page', 'school', 'Success', '', 7, '2025-04-13 14:27:48', '2025-04-13 14:27:48'),
+(24071, 'Visit Create Page', 'supervisor_trainee', 'Success', '', 7, '2025-04-13 15:33:45', '2025-04-13 15:33:45'),
+(24072, 'Visit Create Page', 'attendance', 'Success', '', 7, '2025-04-16 16:06:31', '2025-04-16 16:06:31'),
+(24073, 'Visit Create Page', 'attendance', 'Success', '', 7, '2025-04-16 16:08:02', '2025-04-16 16:08:02'),
+(24074, 'Delete', 'news', 'Success', '{\"Updated id\":[\"484\"]}', 7, '2025-04-16 16:17:13', '2025-04-16 16:17:13'),
+(24075, 'Delete', 'news', 'Success', '{\"Updated id\":[\"485\"]}', 7, '2025-04-16 16:17:17', '2025-04-16 16:17:17'),
+(24076, 'Delete', 'news', 'Success', '{\"Updated id\":[\"486\"]}', 7, '2025-04-16 16:17:21', '2025-04-16 16:17:21'),
+(24077, 'Delete', 'news', 'Success', '{\"Updated id\":[\"487\"]}', 7, '2025-04-16 16:17:25', '2025-04-16 16:17:25'),
+(24078, 'Delete', 'news', 'Success', '{\"Updated id\":[\"488\"]}', 7, '2025-04-16 16:17:30', '2025-04-16 16:17:30'),
+(24079, 'Delete', 'news', 'Success', '{\"Updated id\":[\"489\"]}', 7, '2025-04-16 16:17:34', '2025-04-16 16:17:34'),
+(24080, 'Visit Edit Page', 'menu', 'Success', '{\"Edit Id\":[\"3\"]}', 7, '2025-04-16 16:25:10', '2025-04-16 16:25:10'),
+(24081, 'Visit Edit Page', 'menu', 'Success', '{\"Edit Id\":[\"3\"]}', 7, '2025-04-16 16:25:54', '2025-04-16 16:25:54'),
+(24082, 'Visit Edit Page', 'menu', 'Success', '{\"Edit Id\":[\"3\"]}', 7, '2025-04-16 16:26:10', '2025-04-16 16:26:10'),
+(24083, 'Visit Edit Page', 'menu', 'Success', '{\"Edit Id\":[\"3\"]}', 7, '2025-04-16 16:26:26', '2025-04-16 16:26:26'),
+(24084, 'Visit Edit Page', 'page', 'Success', '{\"Edit Id\":[63]}', 7, '2025-04-16 16:57:03', '2025-04-16 16:57:03'),
+(24085, 'Visit Edit Page', 'page', 'Success', '{\"Edit Id\":[63]}', 7, '2025-04-16 16:58:32', '2025-04-16 16:58:32'),
+(24086, 'Visit Edit Page', 'page', 'Success', '{\"Edit Id\":[63]}', 7, '2025-04-16 16:58:38', '2025-04-16 16:58:38'),
+(24087, 'Visit Edit Page', 'page', 'Success', '{\"Edit Id\":[63]}', 7, '2025-04-16 17:02:27', '2025-04-16 17:02:27'),
+(24088, 'Visit Edit Page', 'page', 'Success', '{\"Edit Id\":[63]}', 7, '2025-04-16 17:03:00', '2025-04-16 17:03:00'),
+(24089, 'Visit Edit Page', 'page', 'Success', '{\"Edit Id\":[63]}', 0, '2025-04-20 15:16:25', '2025-04-20 15:16:25'),
+(24090, 'Visit Edit Page', 'menu', 'Success', '{\"Edit Id\":[\"3\"]}', 7, '2025-04-22 11:12:28', '2025-04-22 11:12:28'),
+(24091, 'Visit Edit Page', 'menu', 'Success', '{\"Edit Id\":[\"3\"]}', 7, '2025-04-22 11:13:07', '2025-04-22 11:13:07'),
+(24092, 'Visit Edit Page', 'menu', 'Success', '{\"Edit Id\":[\"3\"]}', 7, '2025-04-22 11:42:34', '2025-04-22 11:42:34'),
+(24093, 'Visit Edit Page', 'menu', 'Success', '{\"Edit Id\":[\"3\"]}', 7, '2025-04-22 11:44:41', '2025-04-22 11:44:41'),
+(24094, 'Visit Edit Page', 'menu', 'Success', '{\"Edit Id\":[\"3\"]}', 7, '2025-04-22 11:45:35', '2025-04-22 11:45:35'),
+(24095, 'Visit Create Page', 'news', 'Success', '', 7, '2025-04-22 12:15:45', '2025-04-22 12:15:45'),
+(24096, 'Visit Edit Page', 'menu', 'Success', '{\"Edit Id\":[\"3\"]}', 7, '2025-04-22 14:19:27', '2025-04-22 14:19:27'),
+(24097, 'Visit Create Page', 'trainee', 'Success', '', 7, '2025-04-22 14:24:05', '2025-04-22 14:24:05'),
+(24098, 'Visit Create Page', 'trainee', 'Success', '', 7, '2025-04-22 14:24:14', '2025-04-22 14:24:14'),
+(24099, 'Create', 'trainee', 'Success', '{\"New id\":[1]}', 7, '2025-04-22 14:24:26', '2025-04-22 14:24:26'),
+(24100, 'Visit Edit Page', 'trainee', 'Success', '{\"Edit Id\":[\"1\"]}', 7, '2025-04-22 14:24:29', '2025-04-22 14:24:29'),
+(24101, 'Visit Edit Page', 'trainee', 'Success', '{\"Edit Id\":[\"1\"]}', 7, '2025-04-22 14:33:53', '2025-04-22 14:33:53'),
+(24102, 'Visit Edit Page', 'trainee', 'Success', '{\"Edit Id\":[\"1\"]}', 7, '2025-04-22 14:34:47', '2025-04-22 14:34:47'),
+(24103, 'Visit Edit Page', 'trainee', 'Success', '{\"Edit Id\":[\"1\"]}', 7, '2025-04-22 14:35:59', '2025-04-22 14:35:59'),
+(24104, 'Visit Create Page', 'trainee', 'Success', '', 7, '2025-04-22 14:36:01', '2025-04-22 14:36:01'),
+(24105, 'Create', 'trainee', 'Success', '{\"New id\":[2]}', 7, '2025-04-22 14:36:23', '2025-04-22 14:36:23'),
+(24106, 'Visit Edit Page', 'trainee', 'Success', '{\"Edit Id\":[\"2\"]}', 7, '2025-04-22 14:36:27', '2025-04-22 14:36:27'),
+(24107, 'Visit Edit Page', 'trainee', 'Success', '{\"Edit Id\":[\"2\"]}', 7, '2025-04-22 14:36:36', '2025-04-22 14:36:36'),
+(24108, 'Visit Create Page', 'administration', 'Success', '', 7, '2025-04-22 14:37:40', '2025-04-22 14:37:40'),
+(24109, 'Visit Create Page', 'administration', 'Success', '', 7, '2025-04-22 14:38:20', '2025-04-22 14:38:20'),
+(24110, 'Create', 'administration', 'Success', '{\"New id\":[3]}', 7, '2025-04-22 14:38:49', '2025-04-22 14:38:49'),
+(24111, 'Visit Edit Page', 'administration', 'Success', '{\"Edit Id\":[\"3\"]}', 7, '2025-04-22 14:39:12', '2025-04-22 14:39:12'),
+(24112, 'Visit Edit Page', 'administration', 'Success', '{\"Edit Id\":[\"3\"]}', 7, '2025-04-22 14:41:29', '2025-04-22 14:41:29'),
+(24113, 'Visit Edit Page', 'administration', 'Success', '{\"Edit Id\":[\"3\"]}', 7, '2025-04-22 14:42:02', '2025-04-22 14:42:02'),
+(24114, 'Update', 'administration', 'Success', '{\"Updated id\":[\"3\"]}', 7, '2025-04-22 14:42:23', '2025-04-22 14:42:23'),
+(24115, 'Visit Edit Page', 'administration', 'Success', '{\"Edit Id\":[\"3\"]}', 7, '2025-04-22 14:42:23', '2025-04-22 14:42:23'),
+(24116, 'Visit Edit Page', 'menu', 'Success', '{\"Edit Id\":[\"3\"]}', 7, '2025-04-22 14:43:02', '2025-04-22 14:43:02');
 
 -- --------------------------------------------------------
 
@@ -24726,7 +24874,15 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (58, '2024_04_14_1713094635_create_conference_table', 19),
 (59, '2024_04_14_1713095461_create_scholarship_table', 19),
 (60, '2024_04_14_1713095935_create_exhibition_table', 19),
-(61, '2024_09_29_1727604953_create_workshop_table', 20);
+(61, '2024_09_29_1727604953_create_workshop_table', 20),
+(62, '2025_04_12_1744483664_create_administration_table', 21),
+(63, '2025_04_13_1744536589_create_school_table', 22),
+(64, '2025_04_13_1744536974_create_trainee_table', 23),
+(65, '2025_04_13_1744537123_create_supervisor_table', 24),
+(66, '2025_04_13_1744537317_create_supervisor_trainee_table', 25),
+(67, '2025_04_13_1744537649_create_evaluation_table', 25),
+(68, '2025_04_15_1744736357_create_attendance_table', 26),
+(69, '2025_04_15_1744736600_create_assignment_table', 27);
 
 -- --------------------------------------------------------
 
@@ -24746,18 +24902,6 @@ CREATE TABLE `news` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `news`
---
-
-INSERT INTO `news` (`id`, `title`, `author`, `textbody`, `date`, `image`, `flag`, `gallery_id`, `created_at`, `updated_at`) VALUES
-(484, '{\"en\":\"Section 1.10.33 of \\\"de Finibus Bonorum et Malorum\\\", written by Cicero in 45 BC\",\"ar\":\"كيواي نون نيومكيوام ايايوس موداي تيمبورا انكايديونت يوت لابوري أيت دولار ماجنام\"}', '{\"en\":null,\"ar\":null}', '{\"en\":\"<p><span>\\\"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.\\\"<\\/span><\\/p>\",\"ar\":\"<p><span>&ldquo;خسائر اللازمة ومطالبة حدة بل. الآخر الحلفاء أن غزو, إجلاء وتنامت عدد مع. لقهر معركة لبلجيكا، بـ انه, ربع الأثنان المقيتة في, اقتصّت المحور حدة و. هذه ما طرفاً عالمية استسلام, الصين وتنامت حين ٣٠, ونتج والحزب المذابح كل جوي. أسر كارثة المشتّتون بل, وبعض وبداية الصفحة غزو قد, أي بحث تعداد الجنوب.<\\/span><\\/p>\"}', '2024-09-30', '75934_1727680767.png', 1, 1, '2024-09-30 04:13:33', '2024-09-30 06:04:46'),
-(485, '{\"en\":\"Section 1.10.33 of \\\"de Finibus Bonorum et Malorum\\\", written by Cicero in 45 BC\",\"ar\":\"كيواي نون نيومكيوام ايايوس موداي تيمبورا انكايديونت يوت لابوري أيت دولار ماجنام\"}', '{\"en\":null,\"ar\":null}', '{\"en\":\"<p><span>\\\"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.\\\"<\\/span><\\/p>\",\"ar\":\"<p><span>&ldquo;خسائر اللازمة ومطالبة حدة بل. الآخر الحلفاء أن غزو, إجلاء وتنامت عدد مع. لقهر معركة لبلجيكا، بـ انه, ربع الأثنان المقيتة في, اقتصّت المحور حدة و. هذه ما طرفاً عالمية استسلام, الصين وتنامت حين ٣٠, ونتج والحزب المذابح كل جوي. أسر كارثة المشتّتون بل, وبعض وبداية الصفحة غزو قد, أي بحث تعداد الجنوب.<\\/span><\\/p>\"}', '2024-09-30', '93232_1727681264.png', 1, 1, '2024-09-30 04:13:33', '2024-09-30 06:05:00'),
-(486, '{\"en\":\"Section 1.10.33 of \\\"de Finibus Bonorum et Malorum\\\", written by Cicero in 45 BC\",\"ar\":\"كيواي نون نيومكيوام ايايوس موداي تيمبورا انكايديونت يوت لابوري أيت دولار ماجنام\"}', '{\"en\":null,\"ar\":null}', '{\"en\":\"<p><span>\\\"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.\\\"<\\/span><\\/p>\",\"ar\":\"<p><span>&ldquo;خسائر اللازمة ومطالبة حدة بل. الآخر الحلفاء أن غزو, إجلاء وتنامت عدد مع. لقهر معركة لبلجيكا، بـ انه, ربع الأثنان المقيتة في, اقتصّت المحور حدة و. هذه ما طرفاً عالمية استسلام, الصين وتنامت حين ٣٠, ونتج والحزب المذابح كل جوي. أسر كارثة المشتّتون بل, وبعض وبداية الصفحة غزو قد, أي بحث تعداد الجنوب.<\\/span><\\/p>\"}', '2024-09-30', '33728_1727681282.png', 1, 1, '2024-09-30 04:23:03', '2024-09-30 06:05:14'),
-(487, '{\"en\":\"Section 1.10.33 of \\\"de Finibus Bonorum et Malorum\\\", written by Cicero in 45 BC\",\"ar\":\"كيواي نون نيومكيوام ايايوس موداي تيمبورا انكايديونت يوت لابوري أيت دولار ماجنام\"}', '{\"en\":null,\"ar\":null}', '{\"en\":\"<p><span>\\\"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.\\\"<\\/span><\\/p>\",\"ar\":\"<p><span>&ldquo;خسائر اللازمة ومطالبة حدة بل. الآخر الحلفاء أن غزو, إجلاء وتنامت عدد مع. لقهر معركة لبلجيكا، بـ انه, ربع الأثنان المقيتة في, اقتصّت المحور حدة و. هذه ما طرفاً عالمية استسلام, الصين وتنامت حين ٣٠, ونتج والحزب المذابح كل جوي. أسر كارثة المشتّتون بل, وبعض وبداية الصفحة غزو قد, أي بحث تعداد الجنوب.<\\/span><\\/p>\"}', '2024-09-30', '66366_1727681298.png', 1, 1, '2024-09-30 04:24:52', '2024-09-30 06:05:27'),
-(488, '{\"en\":\"Section 1.10.33 of \\\"de Finibus Bonorum et Malorum\\\", written by Cicero in 45 BC\",\"ar\":\"كيواي نون نيومكيوام ايايوس موداي تيمبورا انكايديونت يوت لابوري أيت دولار ماجنام\"}', '{\"en\":null,\"ar\":null}', '{\"en\":\"<p><span>\\\"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.\\\"<\\/span><\\/p>\",\"ar\":\"<p><span>&ldquo;خسائر اللازمة ومطالبة حدة بل. الآخر الحلفاء أن غزو, إجلاء وتنامت عدد مع. لقهر معركة لبلجيكا، بـ انه, ربع الأثنان المقيتة في, اقتصّت المحور حدة و. هذه ما طرفاً عالمية استسلام, الصين وتنامت حين ٣٠, ونتج والحزب المذابح كل جوي. أسر كارثة المشتّتون بل, وبعض وبداية الصفحة غزو قد, أي بحث تعداد الجنوب.<\\/span><\\/p>\"}', '2024-09-30', '30435_1727681317.png', 1, 1, '2024-09-30 04:25:49', '2024-09-30 06:05:45'),
-(489, '{\"en\":\"Section 1.10.33 of \\\"de Finibus Bonorum et Malorum\\\", written by Cicero in 45 BC\",\"ar\":\"كيواي نون نيومكيوام ايايوس موداي تيمبورا انكايديونت يوت لابوري أيت دولار ماجنام\"}', '{\"en\":null,\"ar\":null}', '{\"en\":\"<p><span>\\\"At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.\\\"<\\/span><\\/p>\",\"ar\":\"<p><span>&ldquo;خسائر اللازمة ومطالبة حدة بل. الآخر الحلفاء أن غزو, إجلاء وتنامت عدد مع. لقهر معركة لبلجيكا، بـ انه, ربع الأثنان المقيتة في, اقتصّت المحور حدة و. هذه ما طرفاً عالمية استسلام, الصين وتنامت حين ٣٠, ونتج والحزب المذابح كل جوي. أسر كارثة المشتّتون بل, وبعض وبداية الصفحة غزو قد, أي بحث تعداد الجنوب.<\\/span><\\/p>\"}', '2024-09-30', '30237_1727681333.png', 1, 1, '2024-09-30 04:26:49', '2024-09-30 06:06:50');
 
 -- --------------------------------------------------------
 
@@ -25539,7 +25683,160 @@ INSERT INTO `permissions` (`id`, `name`, `slug`, `description`, `controller_name
 (1057, 'users-websitestore-WorkshopController', 'App-Application-Admin-Workshop-Controller-store', 'Allow admin on store in controller Workshop Controller', 'WorkshopController', 'store', 'website', 1, 'App\\Application\\Controllers\\Website\\WorkshopController', '2024-09-29 07:15:53', '2024-09-29 07:15:53'),
 (1058, 'users-websiteupdate-WorkshopController', 'App-Application-Admin-Workshop-Controller-update', 'Allow admin on update in controller Workshop Controller', 'WorkshopController', 'update', 'website', 1, 'App\\Application\\Controllers\\Website\\WorkshopController', '2024-09-29 07:15:53', '2024-09-29 07:15:53'),
 (1059, 'users-websitegetById-WorkshopController', 'App-Application-Admin-Workshop-Controller-getById', 'Allow admin on getById in controller Workshop Controller', 'WorkshopController', 'getById', 'website', 1, 'App\\Application\\Controllers\\Website\\WorkshopController', '2024-09-29 07:15:53', '2024-09-29 07:15:53'),
-(1060, 'users-websitedestroy-WorkshopController', 'App-Application-Admin-Workshop-Controller-destroy', 'Allow admin on destroy in controller Workshop Controller', 'WorkshopController', 'destroy', 'website', 1, 'App\\Application\\Controllers\\Website\\WorkshopController', '2024-09-29 07:15:53', '2024-09-29 07:15:53');
+(1060, 'users-websitedestroy-WorkshopController', 'App-Application-Admin-Workshop-Controller-destroy', 'Allow admin on destroy in controller Workshop Controller', 'WorkshopController', 'destroy', 'website', 1, 'App\\Application\\Controllers\\Website\\WorkshopController', '2024-09-29 07:15:53', '2024-09-29 07:15:53'),
+(1061, 'index-AdministrationController', 'App-Application-Admin-Administration-Controller-index', 'Allow admin on index in controller Administration Controller', 'AdministrationController', 'index', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AdministrationController', '2025-04-12 16:47:45', '2025-04-12 16:47:45'),
+(1062, 'show-AdministrationController', 'App-Application-Admin-Administration-Controller-show', 'Allow admin on show in controller Administration Controller', 'AdministrationController', 'show', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AdministrationController', '2025-04-12 16:47:45', '2025-04-12 16:47:45'),
+(1063, 'store-AdministrationController', 'App-Application-Admin-Administration-Controller-store', 'Allow admin on store in controller Administration Controller', 'AdministrationController', 'store', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AdministrationController', '2025-04-12 16:47:45', '2025-04-12 16:47:45'),
+(1064, 'update-AdministrationController', 'App-Application-Admin-Administration-Controller-update', 'Allow admin on update in controller Administration Controller', 'AdministrationController', 'update', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AdministrationController', '2025-04-12 16:47:45', '2025-04-12 16:47:45'),
+(1065, 'getById-AdministrationController', 'App-Application-Admin-Administration-Controller-getById', 'Allow admin on getById in controller Administration Controller', 'AdministrationController', 'getById', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AdministrationController', '2025-04-12 16:47:45', '2025-04-12 16:47:45'),
+(1066, 'destroy-AdministrationController', 'App-Application-Admin-Administration-Controller-destroy', 'Allow admin on destroy in controller Administration Controller', 'AdministrationController', 'destroy', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AdministrationController', '2025-04-12 16:47:45', '2025-04-12 16:47:45'),
+(1067, 'pluck-AdministrationController', 'App-Application-Admin-Administration-Controller-pluck', 'Allow admin on pluck in controller Administration Controller', 'AdministrationController', 'pluck', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AdministrationController', '2025-04-12 16:47:45', '2025-04-12 16:47:45'),
+(1068, 'admin-website-index-AdministrationController', 'App-Application-Admin-Administration-Controller-index', 'Allow admin on index in controller Administration Controller', 'AdministrationController', 'index', 'website', 1, 'App\\Application\\Controllers\\Website\\AdministrationController', '2025-04-12 16:47:45', '2025-04-12 16:47:45'),
+(1069, 'admin-website-show-AdministrationController', 'App-Application-Admin-Administration-Controller-show', 'Allow admin on show in controller Administration Controller', 'AdministrationController', 'show', 'website', 1, 'App\\Application\\Controllers\\Website\\AdministrationController', '2025-04-12 16:47:45', '2025-04-12 16:47:45'),
+(1070, 'admin-website-store-AdministrationController', 'App-Application-Admin-Administration-Controller-store', 'Allow admin on store in controller Administration Controller', 'AdministrationController', 'store', 'website', 1, 'App\\Application\\Controllers\\Website\\AdministrationController', '2025-04-12 16:47:45', '2025-04-12 16:47:45'),
+(1071, 'admin-website-update-AdministrationController', 'App-Application-Admin-Administration-Controller-update', 'Allow admin on update in controller Administration Controller', 'AdministrationController', 'update', 'website', 1, 'App\\Application\\Controllers\\Website\\AdministrationController', '2025-04-12 16:47:45', '2025-04-12 16:47:45'),
+(1072, 'admin-website-getById-AdministrationController', 'App-Application-Admin-Administration-Controller-getById', 'Allow admin on getById in controller Administration Controller', 'AdministrationController', 'getById', 'website', 1, 'App\\Application\\Controllers\\Website\\AdministrationController', '2025-04-12 16:47:45', '2025-04-12 16:47:45'),
+(1073, 'admin-website-destroy-AdministrationController', 'App-Application-Admin-Administration-Controller-destroy', 'Allow admin on destroy in controller Administration Controller', 'AdministrationController', 'destroy', 'website', 1, 'App\\Application\\Controllers\\Website\\AdministrationController', '2025-04-12 16:47:45', '2025-04-12 16:47:45'),
+(1074, 'users-websiteindex-AdministrationController', 'App-Application-Admin-Administration-Controller-index', 'Allow admin on index in controller Administration Controller', 'AdministrationController', 'index', 'website', 1, 'App\\Application\\Controllers\\Website\\AdministrationController', '2025-04-12 16:47:45', '2025-04-12 16:47:45'),
+(1075, 'users-websiteshow-AdministrationController', 'App-Application-Admin-Administration-Controller-show', 'Allow admin on show in controller Administration Controller', 'AdministrationController', 'show', 'website', 1, 'App\\Application\\Controllers\\Website\\AdministrationController', '2025-04-12 16:47:45', '2025-04-12 16:47:45'),
+(1076, 'users-websitestore-AdministrationController', 'App-Application-Admin-Administration-Controller-store', 'Allow admin on store in controller Administration Controller', 'AdministrationController', 'store', 'website', 1, 'App\\Application\\Controllers\\Website\\AdministrationController', '2025-04-12 16:47:45', '2025-04-12 16:47:45'),
+(1077, 'users-websiteupdate-AdministrationController', 'App-Application-Admin-Administration-Controller-update', 'Allow admin on update in controller Administration Controller', 'AdministrationController', 'update', 'website', 1, 'App\\Application\\Controllers\\Website\\AdministrationController', '2025-04-12 16:47:45', '2025-04-12 16:47:45'),
+(1078, 'users-websitegetById-AdministrationController', 'App-Application-Admin-Administration-Controller-getById', 'Allow admin on getById in controller Administration Controller', 'AdministrationController', 'getById', 'website', 1, 'App\\Application\\Controllers\\Website\\AdministrationController', '2025-04-12 16:47:45', '2025-04-12 16:47:45'),
+(1079, 'users-websitedestroy-AdministrationController', 'App-Application-Admin-Administration-Controller-destroy', 'Allow admin on destroy in controller Administration Controller', 'AdministrationController', 'destroy', 'website', 1, 'App\\Application\\Controllers\\Website\\AdministrationController', '2025-04-12 16:47:45', '2025-04-12 16:47:45'),
+(1080, 'index-SchoolController', 'App-Application-Admin-School-Controller-index', 'Allow admin on index in controller School Controller', 'SchoolController', 'index', 'admin', 1, 'App\\Application\\Controllers\\Admin\\SchoolController', '2025-04-13 07:29:49', '2025-04-13 07:29:49'),
+(1081, 'show-SchoolController', 'App-Application-Admin-School-Controller-show', 'Allow admin on show in controller School Controller', 'SchoolController', 'show', 'admin', 1, 'App\\Application\\Controllers\\Admin\\SchoolController', '2025-04-13 07:29:49', '2025-04-13 07:29:49'),
+(1082, 'store-SchoolController', 'App-Application-Admin-School-Controller-store', 'Allow admin on store in controller School Controller', 'SchoolController', 'store', 'admin', 1, 'App\\Application\\Controllers\\Admin\\SchoolController', '2025-04-13 07:29:49', '2025-04-13 07:29:49'),
+(1083, 'update-SchoolController', 'App-Application-Admin-School-Controller-update', 'Allow admin on update in controller School Controller', 'SchoolController', 'update', 'admin', 1, 'App\\Application\\Controllers\\Admin\\SchoolController', '2025-04-13 07:29:49', '2025-04-13 07:29:49'),
+(1084, 'getById-SchoolController', 'App-Application-Admin-School-Controller-getById', 'Allow admin on getById in controller School Controller', 'SchoolController', 'getById', 'admin', 1, 'App\\Application\\Controllers\\Admin\\SchoolController', '2025-04-13 07:29:49', '2025-04-13 07:29:49'),
+(1085, 'destroy-SchoolController', 'App-Application-Admin-School-Controller-destroy', 'Allow admin on destroy in controller School Controller', 'SchoolController', 'destroy', 'admin', 1, 'App\\Application\\Controllers\\Admin\\SchoolController', '2025-04-13 07:29:49', '2025-04-13 07:29:49'),
+(1086, 'pluck-SchoolController', 'App-Application-Admin-School-Controller-pluck', 'Allow admin on pluck in controller School Controller', 'SchoolController', 'pluck', 'admin', 1, 'App\\Application\\Controllers\\Admin\\SchoolController', '2025-04-13 07:29:49', '2025-04-13 07:29:49'),
+(1087, 'admin-website-index-SchoolController', 'App-Application-Admin-School-Controller-index', 'Allow admin on index in controller School Controller', 'SchoolController', 'index', 'website', 1, 'App\\Application\\Controllers\\Website\\SchoolController', '2025-04-13 07:29:49', '2025-04-13 07:29:49'),
+(1088, 'admin-website-show-SchoolController', 'App-Application-Admin-School-Controller-show', 'Allow admin on show in controller School Controller', 'SchoolController', 'show', 'website', 1, 'App\\Application\\Controllers\\Website\\SchoolController', '2025-04-13 07:29:49', '2025-04-13 07:29:49'),
+(1089, 'admin-website-store-SchoolController', 'App-Application-Admin-School-Controller-store', 'Allow admin on store in controller School Controller', 'SchoolController', 'store', 'website', 1, 'App\\Application\\Controllers\\Website\\SchoolController', '2025-04-13 07:29:49', '2025-04-13 07:29:49'),
+(1090, 'admin-website-update-SchoolController', 'App-Application-Admin-School-Controller-update', 'Allow admin on update in controller School Controller', 'SchoolController', 'update', 'website', 1, 'App\\Application\\Controllers\\Website\\SchoolController', '2025-04-13 07:29:49', '2025-04-13 07:29:49'),
+(1091, 'admin-website-getById-SchoolController', 'App-Application-Admin-School-Controller-getById', 'Allow admin on getById in controller School Controller', 'SchoolController', 'getById', 'website', 1, 'App\\Application\\Controllers\\Website\\SchoolController', '2025-04-13 07:29:49', '2025-04-13 07:29:49'),
+(1092, 'admin-website-destroy-SchoolController', 'App-Application-Admin-School-Controller-destroy', 'Allow admin on destroy in controller School Controller', 'SchoolController', 'destroy', 'website', 1, 'App\\Application\\Controllers\\Website\\SchoolController', '2025-04-13 07:29:49', '2025-04-13 07:29:49'),
+(1093, 'users-websiteindex-SchoolController', 'App-Application-Admin-School-Controller-index', 'Allow admin on index in controller School Controller', 'SchoolController', 'index', 'website', 1, 'App\\Application\\Controllers\\Website\\SchoolController', '2025-04-13 07:29:49', '2025-04-13 07:29:49'),
+(1094, 'users-websiteshow-SchoolController', 'App-Application-Admin-School-Controller-show', 'Allow admin on show in controller School Controller', 'SchoolController', 'show', 'website', 1, 'App\\Application\\Controllers\\Website\\SchoolController', '2025-04-13 07:29:49', '2025-04-13 07:29:49'),
+(1095, 'users-websitestore-SchoolController', 'App-Application-Admin-School-Controller-store', 'Allow admin on store in controller School Controller', 'SchoolController', 'store', 'website', 1, 'App\\Application\\Controllers\\Website\\SchoolController', '2025-04-13 07:29:49', '2025-04-13 07:29:49'),
+(1096, 'users-websiteupdate-SchoolController', 'App-Application-Admin-School-Controller-update', 'Allow admin on update in controller School Controller', 'SchoolController', 'update', 'website', 1, 'App\\Application\\Controllers\\Website\\SchoolController', '2025-04-13 07:29:49', '2025-04-13 07:29:49'),
+(1097, 'users-websitegetById-SchoolController', 'App-Application-Admin-School-Controller-getById', 'Allow admin on getById in controller School Controller', 'SchoolController', 'getById', 'website', 1, 'App\\Application\\Controllers\\Website\\SchoolController', '2025-04-13 07:29:49', '2025-04-13 07:29:49'),
+(1098, 'users-websitedestroy-SchoolController', 'App-Application-Admin-School-Controller-destroy', 'Allow admin on destroy in controller School Controller', 'SchoolController', 'destroy', 'website', 1, 'App\\Application\\Controllers\\Website\\SchoolController', '2025-04-13 07:29:49', '2025-04-13 07:29:49'),
+(1099, 'index-TraineeController', 'App-Application-Admin-Trainee-Controller-index', 'Allow admin on index in controller Trainee Controller', 'TraineeController', 'index', 'admin', 1, 'App\\Application\\Controllers\\Admin\\TraineeController', '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(1100, 'show-TraineeController', 'App-Application-Admin-Trainee-Controller-show', 'Allow admin on show in controller Trainee Controller', 'TraineeController', 'show', 'admin', 1, 'App\\Application\\Controllers\\Admin\\TraineeController', '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(1101, 'store-TraineeController', 'App-Application-Admin-Trainee-Controller-store', 'Allow admin on store in controller Trainee Controller', 'TraineeController', 'store', 'admin', 1, 'App\\Application\\Controllers\\Admin\\TraineeController', '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(1102, 'update-TraineeController', 'App-Application-Admin-Trainee-Controller-update', 'Allow admin on update in controller Trainee Controller', 'TraineeController', 'update', 'admin', 1, 'App\\Application\\Controllers\\Admin\\TraineeController', '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(1103, 'getById-TraineeController', 'App-Application-Admin-Trainee-Controller-getById', 'Allow admin on getById in controller Trainee Controller', 'TraineeController', 'getById', 'admin', 1, 'App\\Application\\Controllers\\Admin\\TraineeController', '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(1104, 'destroy-TraineeController', 'App-Application-Admin-Trainee-Controller-destroy', 'Allow admin on destroy in controller Trainee Controller', 'TraineeController', 'destroy', 'admin', 1, 'App\\Application\\Controllers\\Admin\\TraineeController', '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(1105, 'pluck-TraineeController', 'App-Application-Admin-Trainee-Controller-pluck', 'Allow admin on pluck in controller Trainee Controller', 'TraineeController', 'pluck', 'admin', 1, 'App\\Application\\Controllers\\Admin\\TraineeController', '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(1106, 'admin-website-index-TraineeController', 'App-Application-Admin-Trainee-Controller-index', 'Allow admin on index in controller Trainee Controller', 'TraineeController', 'index', 'website', 1, 'App\\Application\\Controllers\\Website\\TraineeController', '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(1107, 'admin-website-show-TraineeController', 'App-Application-Admin-Trainee-Controller-show', 'Allow admin on show in controller Trainee Controller', 'TraineeController', 'show', 'website', 1, 'App\\Application\\Controllers\\Website\\TraineeController', '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(1108, 'admin-website-store-TraineeController', 'App-Application-Admin-Trainee-Controller-store', 'Allow admin on store in controller Trainee Controller', 'TraineeController', 'store', 'website', 1, 'App\\Application\\Controllers\\Website\\TraineeController', '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(1109, 'admin-website-update-TraineeController', 'App-Application-Admin-Trainee-Controller-update', 'Allow admin on update in controller Trainee Controller', 'TraineeController', 'update', 'website', 1, 'App\\Application\\Controllers\\Website\\TraineeController', '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(1110, 'admin-website-getById-TraineeController', 'App-Application-Admin-Trainee-Controller-getById', 'Allow admin on getById in controller Trainee Controller', 'TraineeController', 'getById', 'website', 1, 'App\\Application\\Controllers\\Website\\TraineeController', '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(1111, 'admin-website-destroy-TraineeController', 'App-Application-Admin-Trainee-Controller-destroy', 'Allow admin on destroy in controller Trainee Controller', 'TraineeController', 'destroy', 'website', 1, 'App\\Application\\Controllers\\Website\\TraineeController', '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(1112, 'users-websiteindex-TraineeController', 'App-Application-Admin-Trainee-Controller-index', 'Allow admin on index in controller Trainee Controller', 'TraineeController', 'index', 'website', 1, 'App\\Application\\Controllers\\Website\\TraineeController', '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(1113, 'users-websiteshow-TraineeController', 'App-Application-Admin-Trainee-Controller-show', 'Allow admin on show in controller Trainee Controller', 'TraineeController', 'show', 'website', 1, 'App\\Application\\Controllers\\Website\\TraineeController', '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(1114, 'users-websitestore-TraineeController', 'App-Application-Admin-Trainee-Controller-store', 'Allow admin on store in controller Trainee Controller', 'TraineeController', 'store', 'website', 1, 'App\\Application\\Controllers\\Website\\TraineeController', '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(1115, 'users-websiteupdate-TraineeController', 'App-Application-Admin-Trainee-Controller-update', 'Allow admin on update in controller Trainee Controller', 'TraineeController', 'update', 'website', 1, 'App\\Application\\Controllers\\Website\\TraineeController', '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(1116, 'users-websitegetById-TraineeController', 'App-Application-Admin-Trainee-Controller-getById', 'Allow admin on getById in controller Trainee Controller', 'TraineeController', 'getById', 'website', 1, 'App\\Application\\Controllers\\Website\\TraineeController', '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(1117, 'users-websitedestroy-TraineeController', 'App-Application-Admin-Trainee-Controller-destroy', 'Allow admin on destroy in controller Trainee Controller', 'TraineeController', 'destroy', 'website', 1, 'App\\Application\\Controllers\\Website\\TraineeController', '2025-04-13 07:36:14', '2025-04-13 07:36:14'),
+(1118, 'index-SupervisorController', 'App-Application-Admin-Supervisor-Controller-index', 'Allow admin on index in controller Supervisor Controller', 'SupervisorController', 'index', 'admin', 1, 'App\\Application\\Controllers\\Admin\\SupervisorController', '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(1119, 'show-SupervisorController', 'App-Application-Admin-Supervisor-Controller-show', 'Allow admin on show in controller Supervisor Controller', 'SupervisorController', 'show', 'admin', 1, 'App\\Application\\Controllers\\Admin\\SupervisorController', '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(1120, 'store-SupervisorController', 'App-Application-Admin-Supervisor-Controller-store', 'Allow admin on store in controller Supervisor Controller', 'SupervisorController', 'store', 'admin', 1, 'App\\Application\\Controllers\\Admin\\SupervisorController', '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(1121, 'update-SupervisorController', 'App-Application-Admin-Supervisor-Controller-update', 'Allow admin on update in controller Supervisor Controller', 'SupervisorController', 'update', 'admin', 1, 'App\\Application\\Controllers\\Admin\\SupervisorController', '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(1122, 'getById-SupervisorController', 'App-Application-Admin-Supervisor-Controller-getById', 'Allow admin on getById in controller Supervisor Controller', 'SupervisorController', 'getById', 'admin', 1, 'App\\Application\\Controllers\\Admin\\SupervisorController', '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(1123, 'destroy-SupervisorController', 'App-Application-Admin-Supervisor-Controller-destroy', 'Allow admin on destroy in controller Supervisor Controller', 'SupervisorController', 'destroy', 'admin', 1, 'App\\Application\\Controllers\\Admin\\SupervisorController', '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(1124, 'pluck-SupervisorController', 'App-Application-Admin-Supervisor-Controller-pluck', 'Allow admin on pluck in controller Supervisor Controller', 'SupervisorController', 'pluck', 'admin', 1, 'App\\Application\\Controllers\\Admin\\SupervisorController', '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(1125, 'admin-website-index-SupervisorController', 'App-Application-Admin-Supervisor-Controller-index', 'Allow admin on index in controller Supervisor Controller', 'SupervisorController', 'index', 'website', 1, 'App\\Application\\Controllers\\Website\\SupervisorController', '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(1126, 'admin-website-show-SupervisorController', 'App-Application-Admin-Supervisor-Controller-show', 'Allow admin on show in controller Supervisor Controller', 'SupervisorController', 'show', 'website', 1, 'App\\Application\\Controllers\\Website\\SupervisorController', '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(1127, 'admin-website-store-SupervisorController', 'App-Application-Admin-Supervisor-Controller-store', 'Allow admin on store in controller Supervisor Controller', 'SupervisorController', 'store', 'website', 1, 'App\\Application\\Controllers\\Website\\SupervisorController', '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(1128, 'admin-website-update-SupervisorController', 'App-Application-Admin-Supervisor-Controller-update', 'Allow admin on update in controller Supervisor Controller', 'SupervisorController', 'update', 'website', 1, 'App\\Application\\Controllers\\Website\\SupervisorController', '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(1129, 'admin-website-getById-SupervisorController', 'App-Application-Admin-Supervisor-Controller-getById', 'Allow admin on getById in controller Supervisor Controller', 'SupervisorController', 'getById', 'website', 1, 'App\\Application\\Controllers\\Website\\SupervisorController', '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(1130, 'admin-website-destroy-SupervisorController', 'App-Application-Admin-Supervisor-Controller-destroy', 'Allow admin on destroy in controller Supervisor Controller', 'SupervisorController', 'destroy', 'website', 1, 'App\\Application\\Controllers\\Website\\SupervisorController', '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(1131, 'users-websiteindex-SupervisorController', 'App-Application-Admin-Supervisor-Controller-index', 'Allow admin on index in controller Supervisor Controller', 'SupervisorController', 'index', 'website', 1, 'App\\Application\\Controllers\\Website\\SupervisorController', '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(1132, 'users-websiteshow-SupervisorController', 'App-Application-Admin-Supervisor-Controller-show', 'Allow admin on show in controller Supervisor Controller', 'SupervisorController', 'show', 'website', 1, 'App\\Application\\Controllers\\Website\\SupervisorController', '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(1133, 'users-websitestore-SupervisorController', 'App-Application-Admin-Supervisor-Controller-store', 'Allow admin on store in controller Supervisor Controller', 'SupervisorController', 'store', 'website', 1, 'App\\Application\\Controllers\\Website\\SupervisorController', '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(1134, 'users-websiteupdate-SupervisorController', 'App-Application-Admin-Supervisor-Controller-update', 'Allow admin on update in controller Supervisor Controller', 'SupervisorController', 'update', 'website', 1, 'App\\Application\\Controllers\\Website\\SupervisorController', '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(1135, 'users-websitegetById-SupervisorController', 'App-Application-Admin-Supervisor-Controller-getById', 'Allow admin on getById in controller Supervisor Controller', 'SupervisorController', 'getById', 'website', 1, 'App\\Application\\Controllers\\Website\\SupervisorController', '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(1136, 'users-websitedestroy-SupervisorController', 'App-Application-Admin-Supervisor-Controller-destroy', 'Allow admin on destroy in controller Supervisor Controller', 'SupervisorController', 'destroy', 'website', 1, 'App\\Application\\Controllers\\Website\\SupervisorController', '2025-04-13 07:38:43', '2025-04-13 07:38:43'),
+(1137, 'index-Supervisor_traineeController', 'App-Application-Admin-Supervisor_trainee-Controller-index', 'Allow admin on index in controller Supervisor_trainee Controller', 'Supervisor_traineeController', 'index', 'admin', 1, 'App\\Application\\Controllers\\Admin\\Supervisor_traineeController', '2025-04-13 07:41:58', '2025-04-13 07:41:58'),
+(1138, 'show-Supervisor_traineeController', 'App-Application-Admin-Supervisor_trainee-Controller-show', 'Allow admin on show in controller Supervisor_trainee Controller', 'Supervisor_traineeController', 'show', 'admin', 1, 'App\\Application\\Controllers\\Admin\\Supervisor_traineeController', '2025-04-13 07:41:58', '2025-04-13 07:41:58'),
+(1139, 'store-Supervisor_traineeController', 'App-Application-Admin-Supervisor_trainee-Controller-store', 'Allow admin on store in controller Supervisor_trainee Controller', 'Supervisor_traineeController', 'store', 'admin', 1, 'App\\Application\\Controllers\\Admin\\Supervisor_traineeController', '2025-04-13 07:41:58', '2025-04-13 07:41:58'),
+(1140, 'update-Supervisor_traineeController', 'App-Application-Admin-Supervisor_trainee-Controller-update', 'Allow admin on update in controller Supervisor_trainee Controller', 'Supervisor_traineeController', 'update', 'admin', 1, 'App\\Application\\Controllers\\Admin\\Supervisor_traineeController', '2025-04-13 07:41:58', '2025-04-13 07:41:58'),
+(1141, 'getById-Supervisor_traineeController', 'App-Application-Admin-Supervisor_trainee-Controller-getById', 'Allow admin on getById in controller Supervisor_trainee Controller', 'Supervisor_traineeController', 'getById', 'admin', 1, 'App\\Application\\Controllers\\Admin\\Supervisor_traineeController', '2025-04-13 07:41:58', '2025-04-13 07:41:58'),
+(1142, 'destroy-Supervisor_traineeController', 'App-Application-Admin-Supervisor_trainee-Controller-destroy', 'Allow admin on destroy in controller Supervisor_trainee Controller', 'Supervisor_traineeController', 'destroy', 'admin', 1, 'App\\Application\\Controllers\\Admin\\Supervisor_traineeController', '2025-04-13 07:41:58', '2025-04-13 07:41:58'),
+(1143, 'pluck-Supervisor_traineeController', 'App-Application-Admin-Supervisor_trainee-Controller-pluck', 'Allow admin on pluck in controller Supervisor_trainee Controller', 'Supervisor_traineeController', 'pluck', 'admin', 1, 'App\\Application\\Controllers\\Admin\\Supervisor_traineeController', '2025-04-13 07:41:58', '2025-04-13 07:41:58'),
+(1144, 'admin-website-index-Supervisor_traineeController', 'App-Application-Admin-Supervisor_trainee-Controller-index', 'Allow admin on index in controller Supervisor_trainee Controller', 'Supervisor_traineeController', 'index', 'website', 1, 'App\\Application\\Controllers\\Website\\Supervisor_traineeController', '2025-04-13 07:41:58', '2025-04-13 07:41:58'),
+(1145, 'admin-website-show-Supervisor_traineeController', 'App-Application-Admin-Supervisor_trainee-Controller-show', 'Allow admin on show in controller Supervisor_trainee Controller', 'Supervisor_traineeController', 'show', 'website', 1, 'App\\Application\\Controllers\\Website\\Supervisor_traineeController', '2025-04-13 07:41:58', '2025-04-13 07:41:58'),
+(1146, 'admin-website-store-Supervisor_traineeController', 'App-Application-Admin-Supervisor_trainee-Controller-store', 'Allow admin on store in controller Supervisor_trainee Controller', 'Supervisor_traineeController', 'store', 'website', 1, 'App\\Application\\Controllers\\Website\\Supervisor_traineeController', '2025-04-13 07:41:58', '2025-04-13 07:41:58'),
+(1147, 'admin-website-update-Supervisor_traineeController', 'App-Application-Admin-Supervisor_trainee-Controller-update', 'Allow admin on update in controller Supervisor_trainee Controller', 'Supervisor_traineeController', 'update', 'website', 1, 'App\\Application\\Controllers\\Website\\Supervisor_traineeController', '2025-04-13 07:41:58', '2025-04-13 07:41:58'),
+(1148, 'admin-website-getById-Supervisor_traineeController', 'App-Application-Admin-Supervisor_trainee-Controller-getById', 'Allow admin on getById in controller Supervisor_trainee Controller', 'Supervisor_traineeController', 'getById', 'website', 1, 'App\\Application\\Controllers\\Website\\Supervisor_traineeController', '2025-04-13 07:41:58', '2025-04-13 07:41:58'),
+(1149, 'admin-website-destroy-Supervisor_traineeController', 'App-Application-Admin-Supervisor_trainee-Controller-destroy', 'Allow admin on destroy in controller Supervisor_trainee Controller', 'Supervisor_traineeController', 'destroy', 'website', 1, 'App\\Application\\Controllers\\Website\\Supervisor_traineeController', '2025-04-13 07:41:58', '2025-04-13 07:41:58'),
+(1150, 'users-websiteindex-Supervisor_traineeController', 'App-Application-Admin-Supervisor_trainee-Controller-index', 'Allow admin on index in controller Supervisor_trainee Controller', 'Supervisor_traineeController', 'index', 'website', 1, 'App\\Application\\Controllers\\Website\\Supervisor_traineeController', '2025-04-13 07:41:58', '2025-04-13 07:41:58'),
+(1151, 'users-websiteshow-Supervisor_traineeController', 'App-Application-Admin-Supervisor_trainee-Controller-show', 'Allow admin on show in controller Supervisor_trainee Controller', 'Supervisor_traineeController', 'show', 'website', 1, 'App\\Application\\Controllers\\Website\\Supervisor_traineeController', '2025-04-13 07:41:58', '2025-04-13 07:41:58'),
+(1152, 'users-websitestore-Supervisor_traineeController', 'App-Application-Admin-Supervisor_trainee-Controller-store', 'Allow admin on store in controller Supervisor_trainee Controller', 'Supervisor_traineeController', 'store', 'website', 1, 'App\\Application\\Controllers\\Website\\Supervisor_traineeController', '2025-04-13 07:41:58', '2025-04-13 07:41:58'),
+(1153, 'users-websiteupdate-Supervisor_traineeController', 'App-Application-Admin-Supervisor_trainee-Controller-update', 'Allow admin on update in controller Supervisor_trainee Controller', 'Supervisor_traineeController', 'update', 'website', 1, 'App\\Application\\Controllers\\Website\\Supervisor_traineeController', '2025-04-13 07:41:58', '2025-04-13 07:41:58'),
+(1154, 'users-websitegetById-Supervisor_traineeController', 'App-Application-Admin-Supervisor_trainee-Controller-getById', 'Allow admin on getById in controller Supervisor_trainee Controller', 'Supervisor_traineeController', 'getById', 'website', 1, 'App\\Application\\Controllers\\Website\\Supervisor_traineeController', '2025-04-13 07:41:58', '2025-04-13 07:41:58'),
+(1155, 'users-websitedestroy-Supervisor_traineeController', 'App-Application-Admin-Supervisor_trainee-Controller-destroy', 'Allow admin on destroy in controller Supervisor_trainee Controller', 'Supervisor_traineeController', 'destroy', 'website', 1, 'App\\Application\\Controllers\\Website\\Supervisor_traineeController', '2025-04-13 07:41:58', '2025-04-13 07:41:58'),
+(1156, 'index-EvaluationController', 'App-Application-Admin-Evaluation-Controller-index', 'Allow admin on index in controller Evaluation Controller', 'EvaluationController', 'index', 'admin', 1, 'App\\Application\\Controllers\\Admin\\EvaluationController', '2025-04-13 07:47:29', '2025-04-13 07:47:29'),
+(1157, 'show-EvaluationController', 'App-Application-Admin-Evaluation-Controller-show', 'Allow admin on show in controller Evaluation Controller', 'EvaluationController', 'show', 'admin', 1, 'App\\Application\\Controllers\\Admin\\EvaluationController', '2025-04-13 07:47:29', '2025-04-13 07:47:29'),
+(1158, 'store-EvaluationController', 'App-Application-Admin-Evaluation-Controller-store', 'Allow admin on store in controller Evaluation Controller', 'EvaluationController', 'store', 'admin', 1, 'App\\Application\\Controllers\\Admin\\EvaluationController', '2025-04-13 07:47:29', '2025-04-13 07:47:29'),
+(1159, 'update-EvaluationController', 'App-Application-Admin-Evaluation-Controller-update', 'Allow admin on update in controller Evaluation Controller', 'EvaluationController', 'update', 'admin', 1, 'App\\Application\\Controllers\\Admin\\EvaluationController', '2025-04-13 07:47:29', '2025-04-13 07:47:29'),
+(1160, 'getById-EvaluationController', 'App-Application-Admin-Evaluation-Controller-getById', 'Allow admin on getById in controller Evaluation Controller', 'EvaluationController', 'getById', 'admin', 1, 'App\\Application\\Controllers\\Admin\\EvaluationController', '2025-04-13 07:47:29', '2025-04-13 07:47:29'),
+(1161, 'destroy-EvaluationController', 'App-Application-Admin-Evaluation-Controller-destroy', 'Allow admin on destroy in controller Evaluation Controller', 'EvaluationController', 'destroy', 'admin', 1, 'App\\Application\\Controllers\\Admin\\EvaluationController', '2025-04-13 07:47:29', '2025-04-13 07:47:29'),
+(1162, 'pluck-EvaluationController', 'App-Application-Admin-Evaluation-Controller-pluck', 'Allow admin on pluck in controller Evaluation Controller', 'EvaluationController', 'pluck', 'admin', 1, 'App\\Application\\Controllers\\Admin\\EvaluationController', '2025-04-13 07:47:29', '2025-04-13 07:47:29'),
+(1163, 'admin-website-index-EvaluationController', 'App-Application-Admin-Evaluation-Controller-index', 'Allow admin on index in controller Evaluation Controller', 'EvaluationController', 'index', 'website', 1, 'App\\Application\\Controllers\\Website\\EvaluationController', '2025-04-13 07:47:29', '2025-04-13 07:47:29'),
+(1164, 'admin-website-show-EvaluationController', 'App-Application-Admin-Evaluation-Controller-show', 'Allow admin on show in controller Evaluation Controller', 'EvaluationController', 'show', 'website', 1, 'App\\Application\\Controllers\\Website\\EvaluationController', '2025-04-13 07:47:29', '2025-04-13 07:47:29');
+INSERT INTO `permissions` (`id`, `name`, `slug`, `description`, `controller_name`, `method_name`, `controller_type`, `permission`, `namespace`, `created_at`, `updated_at`) VALUES
+(1165, 'admin-website-store-EvaluationController', 'App-Application-Admin-Evaluation-Controller-store', 'Allow admin on store in controller Evaluation Controller', 'EvaluationController', 'store', 'website', 1, 'App\\Application\\Controllers\\Website\\EvaluationController', '2025-04-13 07:47:29', '2025-04-13 07:47:29'),
+(1166, 'admin-website-update-EvaluationController', 'App-Application-Admin-Evaluation-Controller-update', 'Allow admin on update in controller Evaluation Controller', 'EvaluationController', 'update', 'website', 1, 'App\\Application\\Controllers\\Website\\EvaluationController', '2025-04-13 07:47:29', '2025-04-13 07:47:29'),
+(1167, 'admin-website-getById-EvaluationController', 'App-Application-Admin-Evaluation-Controller-getById', 'Allow admin on getById in controller Evaluation Controller', 'EvaluationController', 'getById', 'website', 1, 'App\\Application\\Controllers\\Website\\EvaluationController', '2025-04-13 07:47:29', '2025-04-13 07:47:29'),
+(1168, 'admin-website-destroy-EvaluationController', 'App-Application-Admin-Evaluation-Controller-destroy', 'Allow admin on destroy in controller Evaluation Controller', 'EvaluationController', 'destroy', 'website', 1, 'App\\Application\\Controllers\\Website\\EvaluationController', '2025-04-13 07:47:29', '2025-04-13 07:47:29'),
+(1169, 'users-websiteindex-EvaluationController', 'App-Application-Admin-Evaluation-Controller-index', 'Allow admin on index in controller Evaluation Controller', 'EvaluationController', 'index', 'website', 1, 'App\\Application\\Controllers\\Website\\EvaluationController', '2025-04-13 07:47:29', '2025-04-13 07:47:29'),
+(1170, 'users-websiteshow-EvaluationController', 'App-Application-Admin-Evaluation-Controller-show', 'Allow admin on show in controller Evaluation Controller', 'EvaluationController', 'show', 'website', 1, 'App\\Application\\Controllers\\Website\\EvaluationController', '2025-04-13 07:47:29', '2025-04-13 07:47:29'),
+(1171, 'users-websitestore-EvaluationController', 'App-Application-Admin-Evaluation-Controller-store', 'Allow admin on store in controller Evaluation Controller', 'EvaluationController', 'store', 'website', 1, 'App\\Application\\Controllers\\Website\\EvaluationController', '2025-04-13 07:47:29', '2025-04-13 07:47:29'),
+(1172, 'users-websiteupdate-EvaluationController', 'App-Application-Admin-Evaluation-Controller-update', 'Allow admin on update in controller Evaluation Controller', 'EvaluationController', 'update', 'website', 1, 'App\\Application\\Controllers\\Website\\EvaluationController', '2025-04-13 07:47:29', '2025-04-13 07:47:29'),
+(1173, 'users-websitegetById-EvaluationController', 'App-Application-Admin-Evaluation-Controller-getById', 'Allow admin on getById in controller Evaluation Controller', 'EvaluationController', 'getById', 'website', 1, 'App\\Application\\Controllers\\Website\\EvaluationController', '2025-04-13 07:47:29', '2025-04-13 07:47:29'),
+(1174, 'users-websitedestroy-EvaluationController', 'App-Application-Admin-Evaluation-Controller-destroy', 'Allow admin on destroy in controller Evaluation Controller', 'EvaluationController', 'destroy', 'website', 1, 'App\\Application\\Controllers\\Website\\EvaluationController', '2025-04-13 07:47:29', '2025-04-13 07:47:29'),
+(1175, 'index-AttendanceController', 'App-Application-Admin-Attendance-Controller-index', 'Allow admin on index in controller Attendance Controller', 'AttendanceController', 'index', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AttendanceController', '2025-04-15 14:59:17', '2025-04-15 14:59:17'),
+(1176, 'show-AttendanceController', 'App-Application-Admin-Attendance-Controller-show', 'Allow admin on show in controller Attendance Controller', 'AttendanceController', 'show', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AttendanceController', '2025-04-15 14:59:17', '2025-04-15 14:59:17'),
+(1177, 'store-AttendanceController', 'App-Application-Admin-Attendance-Controller-store', 'Allow admin on store in controller Attendance Controller', 'AttendanceController', 'store', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AttendanceController', '2025-04-15 14:59:17', '2025-04-15 14:59:17'),
+(1178, 'update-AttendanceController', 'App-Application-Admin-Attendance-Controller-update', 'Allow admin on update in controller Attendance Controller', 'AttendanceController', 'update', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AttendanceController', '2025-04-15 14:59:17', '2025-04-15 14:59:17'),
+(1179, 'getById-AttendanceController', 'App-Application-Admin-Attendance-Controller-getById', 'Allow admin on getById in controller Attendance Controller', 'AttendanceController', 'getById', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AttendanceController', '2025-04-15 14:59:17', '2025-04-15 14:59:17'),
+(1180, 'destroy-AttendanceController', 'App-Application-Admin-Attendance-Controller-destroy', 'Allow admin on destroy in controller Attendance Controller', 'AttendanceController', 'destroy', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AttendanceController', '2025-04-15 14:59:17', '2025-04-15 14:59:17'),
+(1181, 'pluck-AttendanceController', 'App-Application-Admin-Attendance-Controller-pluck', 'Allow admin on pluck in controller Attendance Controller', 'AttendanceController', 'pluck', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AttendanceController', '2025-04-15 14:59:17', '2025-04-15 14:59:17'),
+(1182, 'admin-website-index-AttendanceController', 'App-Application-Admin-Attendance-Controller-index', 'Allow admin on index in controller Attendance Controller', 'AttendanceController', 'index', 'website', 1, 'App\\Application\\Controllers\\Website\\AttendanceController', '2025-04-15 14:59:17', '2025-04-15 14:59:17'),
+(1183, 'admin-website-show-AttendanceController', 'App-Application-Admin-Attendance-Controller-show', 'Allow admin on show in controller Attendance Controller', 'AttendanceController', 'show', 'website', 1, 'App\\Application\\Controllers\\Website\\AttendanceController', '2025-04-15 14:59:17', '2025-04-15 14:59:17'),
+(1184, 'admin-website-store-AttendanceController', 'App-Application-Admin-Attendance-Controller-store', 'Allow admin on store in controller Attendance Controller', 'AttendanceController', 'store', 'website', 1, 'App\\Application\\Controllers\\Website\\AttendanceController', '2025-04-15 14:59:17', '2025-04-15 14:59:17'),
+(1185, 'admin-website-update-AttendanceController', 'App-Application-Admin-Attendance-Controller-update', 'Allow admin on update in controller Attendance Controller', 'AttendanceController', 'update', 'website', 1, 'App\\Application\\Controllers\\Website\\AttendanceController', '2025-04-15 14:59:17', '2025-04-15 14:59:17'),
+(1186, 'admin-website-getById-AttendanceController', 'App-Application-Admin-Attendance-Controller-getById', 'Allow admin on getById in controller Attendance Controller', 'AttendanceController', 'getById', 'website', 1, 'App\\Application\\Controllers\\Website\\AttendanceController', '2025-04-15 14:59:17', '2025-04-15 14:59:17'),
+(1187, 'admin-website-destroy-AttendanceController', 'App-Application-Admin-Attendance-Controller-destroy', 'Allow admin on destroy in controller Attendance Controller', 'AttendanceController', 'destroy', 'website', 1, 'App\\Application\\Controllers\\Website\\AttendanceController', '2025-04-15 14:59:17', '2025-04-15 14:59:17'),
+(1188, 'users-websiteindex-AttendanceController', 'App-Application-Admin-Attendance-Controller-index', 'Allow admin on index in controller Attendance Controller', 'AttendanceController', 'index', 'website', 1, 'App\\Application\\Controllers\\Website\\AttendanceController', '2025-04-15 14:59:17', '2025-04-15 14:59:17'),
+(1189, 'users-websiteshow-AttendanceController', 'App-Application-Admin-Attendance-Controller-show', 'Allow admin on show in controller Attendance Controller', 'AttendanceController', 'show', 'website', 1, 'App\\Application\\Controllers\\Website\\AttendanceController', '2025-04-15 14:59:17', '2025-04-15 14:59:17'),
+(1190, 'users-websitestore-AttendanceController', 'App-Application-Admin-Attendance-Controller-store', 'Allow admin on store in controller Attendance Controller', 'AttendanceController', 'store', 'website', 1, 'App\\Application\\Controllers\\Website\\AttendanceController', '2025-04-15 14:59:17', '2025-04-15 14:59:17'),
+(1191, 'users-websiteupdate-AttendanceController', 'App-Application-Admin-Attendance-Controller-update', 'Allow admin on update in controller Attendance Controller', 'AttendanceController', 'update', 'website', 1, 'App\\Application\\Controllers\\Website\\AttendanceController', '2025-04-15 14:59:17', '2025-04-15 14:59:17'),
+(1192, 'users-websitegetById-AttendanceController', 'App-Application-Admin-Attendance-Controller-getById', 'Allow admin on getById in controller Attendance Controller', 'AttendanceController', 'getById', 'website', 1, 'App\\Application\\Controllers\\Website\\AttendanceController', '2025-04-15 14:59:17', '2025-04-15 14:59:17'),
+(1193, 'users-websitedestroy-AttendanceController', 'App-Application-Admin-Attendance-Controller-destroy', 'Allow admin on destroy in controller Attendance Controller', 'AttendanceController', 'destroy', 'website', 1, 'App\\Application\\Controllers\\Website\\AttendanceController', '2025-04-15 14:59:17', '2025-04-15 14:59:17'),
+(1194, 'index-AssignmentController', 'App-Application-Admin-Assignment-Controller-index', 'Allow admin on index in controller Assignment Controller', 'AssignmentController', 'index', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AssignmentController', '2025-04-15 15:03:20', '2025-04-15 15:03:20'),
+(1195, 'show-AssignmentController', 'App-Application-Admin-Assignment-Controller-show', 'Allow admin on show in controller Assignment Controller', 'AssignmentController', 'show', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AssignmentController', '2025-04-15 15:03:20', '2025-04-15 15:03:20'),
+(1196, 'store-AssignmentController', 'App-Application-Admin-Assignment-Controller-store', 'Allow admin on store in controller Assignment Controller', 'AssignmentController', 'store', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AssignmentController', '2025-04-15 15:03:20', '2025-04-15 15:03:20'),
+(1197, 'update-AssignmentController', 'App-Application-Admin-Assignment-Controller-update', 'Allow admin on update in controller Assignment Controller', 'AssignmentController', 'update', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AssignmentController', '2025-04-15 15:03:20', '2025-04-15 15:03:20'),
+(1198, 'getById-AssignmentController', 'App-Application-Admin-Assignment-Controller-getById', 'Allow admin on getById in controller Assignment Controller', 'AssignmentController', 'getById', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AssignmentController', '2025-04-15 15:03:20', '2025-04-15 15:03:20'),
+(1199, 'destroy-AssignmentController', 'App-Application-Admin-Assignment-Controller-destroy', 'Allow admin on destroy in controller Assignment Controller', 'AssignmentController', 'destroy', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AssignmentController', '2025-04-15 15:03:20', '2025-04-15 15:03:20'),
+(1200, 'pluck-AssignmentController', 'App-Application-Admin-Assignment-Controller-pluck', 'Allow admin on pluck in controller Assignment Controller', 'AssignmentController', 'pluck', 'admin', 1, 'App\\Application\\Controllers\\Admin\\AssignmentController', '2025-04-15 15:03:20', '2025-04-15 15:03:20'),
+(1201, 'admin-website-index-AssignmentController', 'App-Application-Admin-Assignment-Controller-index', 'Allow admin on index in controller Assignment Controller', 'AssignmentController', 'index', 'website', 1, 'App\\Application\\Controllers\\Website\\AssignmentController', '2025-04-15 15:03:20', '2025-04-15 15:03:20'),
+(1202, 'admin-website-show-AssignmentController', 'App-Application-Admin-Assignment-Controller-show', 'Allow admin on show in controller Assignment Controller', 'AssignmentController', 'show', 'website', 1, 'App\\Application\\Controllers\\Website\\AssignmentController', '2025-04-15 15:03:20', '2025-04-15 15:03:20'),
+(1203, 'admin-website-store-AssignmentController', 'App-Application-Admin-Assignment-Controller-store', 'Allow admin on store in controller Assignment Controller', 'AssignmentController', 'store', 'website', 1, 'App\\Application\\Controllers\\Website\\AssignmentController', '2025-04-15 15:03:20', '2025-04-15 15:03:20'),
+(1204, 'admin-website-update-AssignmentController', 'App-Application-Admin-Assignment-Controller-update', 'Allow admin on update in controller Assignment Controller', 'AssignmentController', 'update', 'website', 1, 'App\\Application\\Controllers\\Website\\AssignmentController', '2025-04-15 15:03:20', '2025-04-15 15:03:20'),
+(1205, 'admin-website-getById-AssignmentController', 'App-Application-Admin-Assignment-Controller-getById', 'Allow admin on getById in controller Assignment Controller', 'AssignmentController', 'getById', 'website', 1, 'App\\Application\\Controllers\\Website\\AssignmentController', '2025-04-15 15:03:20', '2025-04-15 15:03:20'),
+(1206, 'admin-website-destroy-AssignmentController', 'App-Application-Admin-Assignment-Controller-destroy', 'Allow admin on destroy in controller Assignment Controller', 'AssignmentController', 'destroy', 'website', 1, 'App\\Application\\Controllers\\Website\\AssignmentController', '2025-04-15 15:03:20', '2025-04-15 15:03:20'),
+(1207, 'users-websiteindex-AssignmentController', 'App-Application-Admin-Assignment-Controller-index', 'Allow admin on index in controller Assignment Controller', 'AssignmentController', 'index', 'website', 1, 'App\\Application\\Controllers\\Website\\AssignmentController', '2025-04-15 15:03:20', '2025-04-15 15:03:20'),
+(1208, 'users-websiteshow-AssignmentController', 'App-Application-Admin-Assignment-Controller-show', 'Allow admin on show in controller Assignment Controller', 'AssignmentController', 'show', 'website', 1, 'App\\Application\\Controllers\\Website\\AssignmentController', '2025-04-15 15:03:20', '2025-04-15 15:03:20'),
+(1209, 'users-websitestore-AssignmentController', 'App-Application-Admin-Assignment-Controller-store', 'Allow admin on store in controller Assignment Controller', 'AssignmentController', 'store', 'website', 1, 'App\\Application\\Controllers\\Website\\AssignmentController', '2025-04-15 15:03:20', '2025-04-15 15:03:20'),
+(1210, 'users-websiteupdate-AssignmentController', 'App-Application-Admin-Assignment-Controller-update', 'Allow admin on update in controller Assignment Controller', 'AssignmentController', 'update', 'website', 1, 'App\\Application\\Controllers\\Website\\AssignmentController', '2025-04-15 15:03:20', '2025-04-15 15:03:20'),
+(1211, 'users-websitegetById-AssignmentController', 'App-Application-Admin-Assignment-Controller-getById', 'Allow admin on getById in controller Assignment Controller', 'AssignmentController', 'getById', 'website', 1, 'App\\Application\\Controllers\\Website\\AssignmentController', '2025-04-15 15:03:20', '2025-04-15 15:03:20'),
+(1212, 'users-websitedestroy-AssignmentController', 'App-Application-Admin-Assignment-Controller-destroy', 'Allow admin on destroy in controller Assignment Controller', 'AssignmentController', 'destroy', 'website', 1, 'App\\Application\\Controllers\\Website\\AssignmentController', '2025-04-15 15:03:20', '2025-04-15 15:03:20');
 
 -- --------------------------------------------------------
 
@@ -26350,7 +26647,159 @@ INSERT INTO `permission_group` (`id`, `permission_id`, `group_id`) VALUES
 (1258, 1057, 2),
 (1259, 1058, 2),
 (1260, 1059, 2),
-(1261, 1060, 2);
+(1261, 1060, 2),
+(1262, 1061, 1),
+(1263, 1062, 1),
+(1264, 1063, 1),
+(1265, 1064, 1),
+(1266, 1065, 1),
+(1267, 1066, 1),
+(1268, 1067, 1),
+(1269, 1068, 1),
+(1270, 1069, 1),
+(1271, 1070, 1),
+(1272, 1071, 1),
+(1273, 1072, 1),
+(1274, 1073, 1),
+(1275, 1074, 2),
+(1276, 1075, 2),
+(1277, 1076, 2),
+(1278, 1077, 2),
+(1279, 1078, 2),
+(1280, 1079, 2),
+(1281, 1080, 1),
+(1282, 1081, 1),
+(1283, 1082, 1),
+(1284, 1083, 1),
+(1285, 1084, 1),
+(1286, 1085, 1),
+(1287, 1086, 1),
+(1288, 1087, 1),
+(1289, 1088, 1),
+(1290, 1089, 1),
+(1291, 1090, 1),
+(1292, 1091, 1),
+(1293, 1092, 1),
+(1294, 1093, 2),
+(1295, 1094, 2),
+(1296, 1095, 2),
+(1297, 1096, 2),
+(1298, 1097, 2),
+(1299, 1098, 2),
+(1300, 1099, 1),
+(1301, 1100, 1),
+(1302, 1101, 1),
+(1303, 1102, 1),
+(1304, 1103, 1),
+(1305, 1104, 1),
+(1306, 1105, 1),
+(1307, 1106, 1),
+(1308, 1107, 1),
+(1309, 1108, 1),
+(1310, 1109, 1),
+(1311, 1110, 1),
+(1312, 1111, 1),
+(1313, 1112, 2),
+(1314, 1113, 2),
+(1315, 1114, 2),
+(1316, 1115, 2),
+(1317, 1116, 2),
+(1318, 1117, 2),
+(1319, 1118, 1),
+(1320, 1119, 1),
+(1321, 1120, 1),
+(1322, 1121, 1),
+(1323, 1122, 1),
+(1324, 1123, 1),
+(1325, 1124, 1),
+(1326, 1125, 1),
+(1327, 1126, 1),
+(1328, 1127, 1),
+(1329, 1128, 1),
+(1330, 1129, 1),
+(1331, 1130, 1),
+(1332, 1131, 2),
+(1333, 1132, 2),
+(1334, 1133, 2),
+(1335, 1134, 2),
+(1336, 1135, 2),
+(1337, 1136, 2),
+(1338, 1137, 1),
+(1339, 1138, 1),
+(1340, 1139, 1),
+(1341, 1140, 1),
+(1342, 1141, 1),
+(1343, 1142, 1),
+(1344, 1143, 1),
+(1345, 1144, 1),
+(1346, 1145, 1),
+(1347, 1146, 1),
+(1348, 1147, 1),
+(1349, 1148, 1),
+(1350, 1149, 1),
+(1351, 1150, 2),
+(1352, 1151, 2),
+(1353, 1152, 2),
+(1354, 1153, 2),
+(1355, 1154, 2),
+(1356, 1155, 2),
+(1357, 1156, 1),
+(1358, 1157, 1),
+(1359, 1158, 1),
+(1360, 1159, 1),
+(1361, 1160, 1),
+(1362, 1161, 1),
+(1363, 1162, 1),
+(1364, 1163, 1),
+(1365, 1164, 1),
+(1366, 1165, 1),
+(1367, 1166, 1),
+(1368, 1167, 1),
+(1369, 1168, 1),
+(1370, 1169, 2),
+(1371, 1170, 2),
+(1372, 1171, 2),
+(1373, 1172, 2),
+(1374, 1173, 2),
+(1375, 1174, 2),
+(1376, 1175, 1),
+(1377, 1176, 1),
+(1378, 1177, 1),
+(1379, 1178, 1),
+(1380, 1179, 1),
+(1381, 1180, 1),
+(1382, 1181, 1),
+(1383, 1182, 1),
+(1384, 1183, 1),
+(1385, 1184, 1),
+(1386, 1185, 1),
+(1387, 1186, 1),
+(1388, 1187, 1),
+(1389, 1188, 2),
+(1390, 1189, 2),
+(1391, 1190, 2),
+(1392, 1191, 2),
+(1393, 1192, 2),
+(1394, 1193, 2),
+(1395, 1194, 1),
+(1396, 1195, 1),
+(1397, 1196, 1),
+(1398, 1197, 1),
+(1399, 1198, 1),
+(1400, 1199, 1),
+(1401, 1200, 1),
+(1402, 1201, 1),
+(1403, 1202, 1),
+(1404, 1203, 1),
+(1405, 1204, 1),
+(1406, 1205, 1),
+(1407, 1206, 1),
+(1408, 1207, 2),
+(1409, 1208, 2),
+(1410, 1209, 2),
+(1411, 1210, 2),
+(1412, 1211, 2),
+(1413, 1212, 2);
 
 -- --------------------------------------------------------
 
@@ -26478,7 +26927,12 @@ CREATE TABLE `relations` (
 
 INSERT INTO `relations` (`id`, `name`, `options`, `command`, `p`, `f`, `t`, `created_at`, `updated_at`) VALUES
 (1, 'faculty_department', 'faculty,department,otm,true,name,id,id,checkbox', 'laraflat:relation', 'faculty', 'department', 'otm', '2021-05-25 22:33:23', '2021-05-25 22:33:23'),
-(11, 'faculty_team', 'faculty,team,otm,true,id,id,created_at,checkbox', 'laraflat:relation', 'faculty', 'team', 'otm', '2024-04-08 06:21:25', '2024-04-08 06:21:25');
+(11, 'faculty_team', 'faculty,team,otm,true,id,id,created_at,checkbox', 'laraflat:relation', 'faculty', 'team', 'otm', '2024-04-08 06:21:25', '2024-04-08 06:21:25'),
+(12, 'administration_school', 'administration,school,otm,true,name,id,address,checkbox', 'laraflat:relation', 'administration', 'school', 'otm', '2025-04-13 14:27:31', '2025-04-13 14:27:31'),
+(13, 'school_trainee', 'school,trainee,otm,true,name,id,created_at,checkbox', 'laraflat:relation', 'school', 'trainee', 'otm', '2025-04-13 14:34:08', '2025-04-13 14:34:08'),
+(14, 'school_supervisor', 'school,supervisor,otm,true,name,id,created_at,checkbox', 'laraflat:relation', 'school', 'supervisor', 'otm', '2025-04-13 14:35:14', '2025-04-13 14:35:14'),
+(17, 'trainee_supervisor_trainee', 'trainee,supervisor_trainee,otm,true,name,id,created_at,checkbox', 'laraflat:relation', 'trainee', 'supervisor_trainee', 'otm', '2025-04-13 14:46:10', '2025-04-13 14:46:10'),
+(18, 'supervisor_supervisor_trainee', 'supervisor,supervisor_trainee,otm,true,name,id,created_at,checkbox', 'laraflat:relation', 'supervisor', 'supervisor_trainee', 'otm', '2025-04-13 14:47:54', '2025-04-13 14:47:54');
 
 -- --------------------------------------------------------
 
@@ -26510,6 +26964,22 @@ CREATE TABLE `role_user` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `school`
+--
+
+CREATE TABLE `school` (
+  `id` int UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` text COLLATE utf8mb4_unicode_ci,
+  `image` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `administration_id` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `setting`
 --
 
@@ -26528,8 +26998,8 @@ CREATE TABLE `setting` (
 
 INSERT INTO `setting` (`id`, `name`, `type`, `body_setting`, `created_at`, `updated_at`) VALUES
 (1, 'siteTitle', 'text', 'Talented and Innovator Center', NULL, NULL),
-(7, 'About-ar', 'textarea', 'يعد مركز المهارات والمحاكاة الطبي بجامعة بنها من أكبر مراكز المحاكاة في الجامعات المصرية من حيث المساحة والتجهيزات، حيث يضم( 10) غرفة للمحاكاة الطبيه و( 8 ) معامل للمحاكاة الإجرائية و( 7 )عيادات لإختبارات الأوسكي مجهزة بأحدث المعدات والأجهزة الطبية،منها مايقارب (85) دمية بشرية متنوعة،بالإضافة إلى كفاءات متخصصة في مجال المحاكاة الصحية،ويسعى المركز إلى استثمار الفرص والإمكانيات المتاحة له بما يحقق رؤية ورسالة الجامعة و الاستراتيجية الوطنية للتعليم العالي والبحث العلمي ورؤية مصر  2030م في الجانب الصحي والتعليمي من خلال مواكبة الواقع الإفتراضي لبيئة المستشفيات.\r\nوقد تم تجهيز المركز بأفضل الشاشات التفاعلية العملاقة والمزودة بسوفت وير لأحدث التطبيقات و البرامج الطبية التعليمية من أجل ضمان اعلى جوده للتدريب الطبي والجراحي  و فى إطار روية مستقبلية تسعى لحصول المركز على الاعتماد الدولى', '2024-06-20 06:55:02', '2024-09-02 14:05:07'),
-(8, 'About footer-ar', 'textarea', 'يعد مركز المهارات والمحاكاة الطبي بجامعة بنها من أكبر مراكز المحاكاة في الجامعات المصرية من حيث المساحة والتجهيزات، حيث يضم( 10) غرفة للمحاكاة الطبيه و( 8 ) معامل للمحاكاة الإجرائية و( 7 )عيادات لإختبارات الأوسكي مجهزة بأحدث المعدات والأجهزة الطبية،منها مايقارب (85) دمية بشرية متنوعة،', '2024-06-20 06:57:50', '2024-09-05 08:05:17'),
+(7, 'About-ar', 'textarea', '', '2024-06-20 06:55:02', '2024-09-02 14:05:07'),
+(8, 'About footer-ar', 'textarea', '', '2024-06-20 06:57:50', '2024-09-05 08:05:17'),
 (9, 'About-en', 'textarea', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', '2024-06-20 06:58:47', '2024-06-24 12:36:41'),
 (10, 'About footer-en', 'textarea', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled', '2024-06-20 06:59:18', '2024-06-24 12:37:05');
 
@@ -26565,6 +27035,37 @@ INSERT INTO `slider` (`id`, `image`, `title`, `text`, `date`, `body`, `gallery`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `supervisor`
+--
+
+CREATE TABLE `supervisor` (
+  `id` int UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `school_id` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `supervisor_trainee`
+--
+
+CREATE TABLE `supervisor_trainee` (
+  `id` int UNSIGNED NOT NULL,
+  `supervisor_id` int DEFAULT NULL,
+  `trainee_id` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `team`
 --
 
@@ -26588,6 +27089,32 @@ INSERT INTO `team` (`id`, `name`, `position`, `type`, `image`, `faculty_id`, `cr
 (2, '{\"en\":\"Prof\\/\",\"ar\":\"أ.د\\/\"}', '{\"en\":\"Responsible\",\"ar\":\"مسئول\"}', 0, '60291_1715361660.png', 15, '2024-04-08 08:39:09', '2024-05-10 14:49:49'),
 (3, '{\"en\":\"Dr.\",\"ar\":\"د\\/\"}', '{\"en\":\"Responsible\",\"ar\":\"مسئول\"}', 0, '76657_1715361746.png', 1, '2024-04-08 08:40:10', '2024-05-10 14:50:04'),
 (4, '{\"en\":\"Ms.\",\"ar\":\"أ\\/\"}', '{\"en\":\"Responsible\",\"ar\":\"مسئول\"}', 0, '50970_1715361704.png', 1, '2024-04-08 08:40:59', '2024-05-10 14:50:22');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `trainee`
+--
+
+CREATE TABLE `trainee` (
+  `id` int UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `national_id` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `school_id` int DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `trainee`
+--
+
+INSERT INTO `trainee` (`id`, `name`, `email`, `phone`, `national_id`, `image`, `school_id`, `created_at`, `updated_at`) VALUES
+(1, '{\"ar\":null,\"en\":null}', 'fatma.mahmoud@bu.edu.eg', NULL, NULL, NULL, 1, '2025-04-22 14:24:26', '2025-04-22 14:24:26'),
+(2, '{\"ar\":\"ddd\",\"en\":null}', 'fatema.smesem@yahoo.com', NULL, '1', '61805_1745339783.jpg!f305cw', 1, '2025-04-22 14:36:23', '2025-04-22 14:36:23');
 
 -- --------------------------------------------------------
 
@@ -26652,6 +27179,24 @@ INSERT INTO `workshop` (`id`, `title`, `description`, `created_at`, `updated_at`
 --
 
 --
+-- Indexes for table `administration`
+--
+ALTER TABLE `administration`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `assignment`
+--
+ALTER TABLE `assignment`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `attendance`
+--
+ALTER TABLE `attendance`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `categorie`
 --
 ALTER TABLE `categorie`
@@ -26681,6 +27226,12 @@ ALTER TABLE `contacts`
 ALTER TABLE `department`
   ADD PRIMARY KEY (`id`),
   ADD KEY `department_faculty_id_foreign` (`faculty_id`);
+
+--
+-- Indexes for table `evaluation`
+--
+ALTER TABLE `evaluation`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `faculty`
@@ -26828,6 +27379,12 @@ ALTER TABLE `role_user`
   ADD KEY `role_user_user_id_foreign` (`user_id`);
 
 --
+-- Indexes for table `school`
+--
+ALTER TABLE `school`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `setting`
 --
 ALTER TABLE `setting`
@@ -26840,9 +27397,27 @@ ALTER TABLE `slider`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `supervisor`
+--
+ALTER TABLE `supervisor`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `supervisor_trainee`
+--
+ALTER TABLE `supervisor_trainee`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `team`
 --
 ALTER TABLE `team`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `trainee`
+--
+ALTER TABLE `trainee`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -26865,6 +27440,24 @@ ALTER TABLE `workshop`
 --
 
 --
+-- AUTO_INCREMENT for table `administration`
+--
+ALTER TABLE `administration`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `assignment`
+--
+ALTER TABLE `assignment`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `attendance`
+--
+ALTER TABLE `attendance`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `categorie`
 --
 ALTER TABLE `categorie`
@@ -26874,7 +27467,7 @@ ALTER TABLE `categorie`
 -- AUTO_INCREMENT for table `command`
 --
 ALTER TABLE `command`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `conference`
@@ -26893,6 +27486,12 @@ ALTER TABLE `contacts`
 --
 ALTER TABLE `department`
   MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
+
+--
+-- AUTO_INCREMENT for table `evaluation`
+--
+ALTER TABLE `evaluation`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `faculty`
@@ -26928,7 +27527,7 @@ ALTER TABLE `image`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
 
 --
 -- AUTO_INCREMENT for table `links`
@@ -26946,7 +27545,7 @@ ALTER TABLE `link_views`
 -- AUTO_INCREMENT for table `logs`
 --
 ALTER TABLE `logs`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24053;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24117;
 
 --
 -- AUTO_INCREMENT for table `menu`
@@ -26958,7 +27557,7 @@ ALTER TABLE `menu`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `news`
@@ -26982,13 +27581,13 @@ ALTER TABLE `pagecomment`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1061;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1213;
 
 --
 -- AUTO_INCREMENT for table `permission_group`
 --
 ALTER TABLE `permission_group`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1262;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1414;
 
 --
 -- AUTO_INCREMENT for table `permission_role`
@@ -27006,7 +27605,7 @@ ALTER TABLE `permission_user`
 -- AUTO_INCREMENT for table `relations`
 --
 ALTER TABLE `relations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -27018,6 +27617,12 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `role_user`
 --
 ALTER TABLE `role_user`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `school`
+--
+ALTER TABLE `school`
   MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -27033,10 +27638,28 @@ ALTER TABLE `slider`
   MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `supervisor`
+--
+ALTER TABLE `supervisor`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `supervisor_trainee`
+--
+ALTER TABLE `supervisor_trainee`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `team`
 --
 ALTER TABLE `team`
   MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `trainee`
+--
+ALTER TABLE `trainee`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -43,6 +43,28 @@
 </section><!-- End About Section --> --}}
 
 
+<section id="popular-courses" class="courses">
+    <div class="container aos-init aos-animate" data-aos="fade-up">
+        <div class="section-title">
+            <h2>{{ trans('program.credit_hours') }}</h2>
+            <p>{{ trans('administration.administration') }}</p>
+        </div>
+        <div class="row aos-init aos-animate" data-aos="zoom-in" data-aos-delay="100">
+            @foreach($administration as $administration)            
+            <div class="col-lg-2 col-md-4 align-items-stretch mt-4">
+                <div class="course-item">{{ $administration->name_lang }}
+                    {{-- <a href="{{url('faculties/programs/'.$faculty->id)}}">--}}
+                                        <img src="{{ large($administration->image)}}" class="img-fluid" alt="{{ $administration->name }}" >
+                                        {{-- </a>  --}}
+                </div>
+            </div>
+            @endforeach
+            <!-- End Item-->
+        </div>        
+    </div>
+</section>
+
+
 <!-- ======= Popular News Section ======= -->
 <section id="popular-courses" class="courses">
     <div class="container" data-aos="fade-up">

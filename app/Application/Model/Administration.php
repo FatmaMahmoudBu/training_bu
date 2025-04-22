@@ -8,7 +8,7 @@
 		return $this->hasMany(School::class, "administration_id");
 		}
      protected $fillable = [
-        'name','address'
+        'name','address','image'
    ];
   public function getNameLangAttribute(){
   return is_json($this->name) && is_object(json_decode($this->name)) ?  json_decode($this->name)->{getCurrentLang()}  : $this->name;

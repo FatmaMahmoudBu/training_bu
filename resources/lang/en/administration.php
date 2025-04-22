@@ -1,5 +1,8 @@
 <?php
 
 return [
-    'administration' => 'administration'
+    'administration' => 'administration',
+    'name' => 'Name',
+    'address' => 'Address',
+    'image' => 'Image'
 ];

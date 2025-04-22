@@ -45,6 +45,22 @@
      </span>
     </div>
    @endif
+   <div class="form-group {{ $errors->has("image") ? "has-error" : "" }}" > 
+			<label for="image">{{ trans("school.image")}}</label>
+				@if(isset($item) && $item->image != "")
+				<br>
+				<img src="{{ small($item->image) }}" class="thumbnail" alt="" width="200">
+				<br>
+				@endif
+				<input type="file" name="image" >
+		</div>
+			@if ($errors->has("image"))
+				<div class="alert alert-danger">
+					<span class='help-block'>
+						<strong>{{ $errors->first("image") }}</strong>
+					</span>
+				</div>
+			@endif
    <div class="form-group {{ $errors->has("administration_id") ? "has-error" : "" }}" > 
    <label for="administration_id">{{ trans("school.administration_id")}}</label>
     <input type="text" name="administration_id" class="form-control" id="administration_id" value="{{ isset($item->administration_id) ? $item->administration_id : old("administration_id") }}"  placeholder="{{ trans("school.administration_id")}}">

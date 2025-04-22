@@ -10,6 +10,7 @@ class ApiAddRequestAdministration
         return [
             "name" => "",
 			"address" => "",
+			"image" => "image",
 			
         ];
     }

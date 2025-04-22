@@ -1,5 +1,10 @@
 <?php
 
 return [
-    'supervisor' => 'supervisor'
+    'supervisor' => 'المشرف',
+    'name' => 'الإسم',
+    'email' => 'البريد الإلكترونى',
+    'phone' => 'رقم الهاتف',
+    'school_id' => 'المدرسة',
+    'image' => 'صورة'
 ];

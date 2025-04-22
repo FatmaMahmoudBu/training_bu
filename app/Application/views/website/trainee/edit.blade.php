@@ -49,6 +49,22 @@
      </span>
     </div>
    @endif
+   <div class="form-group {{ $errors->has("image") ? "has-error" : "" }}" > 
+			<label for="image">{{ trans("trainee.image")}}</label>
+				@if(isset($item) && $item->image != "")
+				<br>
+				<img src="{{ small($item->image) }}" class="thumbnail" alt="" width="200">
+				<br>
+				@endif
+				<input type="file" name="image" >
+		</div>
+			@if ($errors->has("image"))
+				<div class="alert alert-danger">
+					<span class='help-block'>
+						<strong>{{ $errors->first("image") }}</strong>
+					</span>
+				</div>
+			@endif
    <div class="form-group {{ $errors->has("national_id") ? "has-error" : "" }}" > 
    <label for="national_id">{{ trans("trainee.national_id")}}</label>
     <input type="text" name="national_id" class="form-control" id="national_id" value="{{ isset($item->national_id) ? $item->national_id : old("national_id") }}"  placeholder="{{ trans("trainee.national_id")}}">

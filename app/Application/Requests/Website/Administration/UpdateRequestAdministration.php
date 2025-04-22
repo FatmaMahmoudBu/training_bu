@@ -28,6 +28,7 @@ class UpdateRequestAdministration extends FormRequest
         return [
             "name.*" => "",
 			"address.*" => "",
+			"image" => "image",
 			
         ];
     }

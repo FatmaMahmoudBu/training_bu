@@ -15,6 +15,12 @@
 				<th width="200">{{ trans("administration.address") }}</th>
 					<td>{{ nl2br($item->address_lang) }}</td>
 				</tr>
+				<tr>
+				<th width="200">{{ trans("administration.image") }}</th>
+					<td>
+					<img src="{{ small($item->image) }}" width="100" />
+					</td>
+				</tr>
 		</table>
 
         @include('admin.administration.buttons.delete' , ['id' => $item->id])

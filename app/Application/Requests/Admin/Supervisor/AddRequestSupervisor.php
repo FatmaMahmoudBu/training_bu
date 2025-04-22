@@ -24,6 +24,7 @@
             "name.*" => "",
    "email" => "",
    "phone" => "",
+   "image" => "image",
    "school_id" => "integer",
             ];
     }

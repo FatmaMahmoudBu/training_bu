@@ -3,6 +3,7 @@
 namespace App\Application\Controllers\Website;
 use App\Application\Controllers\AbstractController;
 use App\Application\Controllers\Controller;
+use App\Application\Model\Administration;
 use App\Application\Model\Page;
 use App\Application\Model\User;
 use App\Application\Model\News;
@@ -35,7 +36,9 @@ class HomeController extends Controller
         $gallery = Gallery::find(1);
         $images = Image::orderBy('id', 'asc')->where('gallery_id', '1')->get();
 
-        return view(layoutHomePage('website'),compact('news', 'home_about_settings', 'gallery', 'images'));
+        $administration= Administration::orderBy('name', 'desc')->get();
+        
+        return view(layoutHomePage('website'),compact('news', 'home_about_settings', 'gallery', 'images', 'administration'));
     }
 
     public function deleteImage($model, $id, Request $request)

@@ -9,6 +9,7 @@
         return [
         	"administration_id" => "required|integer",
             "name" => "address.*",
+			"image" => "image",
    "administration_id" => "integer",
             ];
     }

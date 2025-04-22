@@ -1,6 +1,6 @@
 
 <div class="container d-flex align-items-center">
-    <a href="{{ url('/') }}" class="logos"><img src="{{ url('/') }}/assets/img/irsc_logo.png" alt="" style="width:auto; height:70px;"></a>
+    <a href="{{ url('/') }}" class="logos"><img src="{{ url('/') }}/assets/img/bu_logo2.png" alt="" style="width:auto; height:70px;"></a>
     <h1 class="logo"><a href="{{ url('/') }}"> {{ trans('website.siteTitle') }} </a></h1>
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>

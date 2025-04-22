@@ -14,6 +14,12 @@
      <td>{{ nl2br($item->address_lang) }}</td>
     </tr>
     <tr>
+				<th width="200">{{ trans("school.image") }}</th>
+					<td>
+					<img src="{{ small($item->image) }}" width="100" />
+					</td>
+				</tr>
+    <tr>
     <th width="200">{{ trans("school.administration_id") }}</th>
      <td>{{ nl2br($item->administration_id) }}</td>
     </tr>

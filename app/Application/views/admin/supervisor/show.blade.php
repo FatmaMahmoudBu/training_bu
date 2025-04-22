@@ -18,6 +18,12 @@
      <td>{{ nl2br($item->phone) }}</td>
     </tr>
     <tr>
+				<th width="200">{{ trans("supervisor.image") }}</th>
+					<td>
+					<img src="{{ small($item->image) }}" width="100" />
+					</td>
+				</tr>
+    <tr>
     <th width="200">{{ trans("supervisor.school_id") }}</th>
      <td>{{ nl2br($item->school_id) }}</td>
     </tr>

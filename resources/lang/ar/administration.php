@@ -1,5 +1,8 @@
 <?php
 
 return [
-    'administration' => 'administration'
+    'administration' => 'الإدارة التعليمية',
+    'name' => 'الإسم',
+    'address' => 'العنوان',
+    'image' => 'صورة'
 ];

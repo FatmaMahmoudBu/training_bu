@@ -10,7 +10,7 @@
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs" data-aos="fade-in">
         <div class="container">
-            <h2> {{ trans('administration.credit_hours') }} </h2>
+            <h2> {{ trans('administration.administration') }} </h2>
         </div>
     </div><!-- End Breadcrumbs -->
 
@@ -20,7 +20,7 @@
 
       <div class="container" data-aos="fade-up">
       <div class="section-title">
-            <h2>{{ trans('administration.credit_hours') }}</h2>
+            <h2>{{ trans('administration.administration') }}</h2>
             <p>{{trans('administration.administration')}}</p>
         </div>
 

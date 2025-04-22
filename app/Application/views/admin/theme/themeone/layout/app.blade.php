@@ -81,7 +81,7 @@
             <!-- /toggle offscreen menu -->
             <!-- logo -->
             <a class="brand-logo">
-                <img class="expanding-hidden" src="{{ url('/') }}/assets/img/irsc_logo.png" style="width:auto; height:50px;" alt=""/>
+                <img class="expanding-hidden" src="{{ url('/') }}/assets/img/bu_logo2.png" style="width:auto; height:50px;" alt=""/>
                 {{-- <small class="bold">{{ getSetting('siteTitle') }}</small> --}}
             </a>
 
@@ -139,7 +139,7 @@
                     <!-- /toggle offscreen menu -->
                     <!-- logo -->
                     <a class="brand-logo hidden-xs-down">
-                        <img src="{{ url('/') }}/assets/img/irsc_logo.png" alt="logo"/>
+                        <img src="{{ url('/') }}/assets/img/bu_logo2.png" alt="logo"/>
                     </a>
                     <!-- /logo -->
                 </div>

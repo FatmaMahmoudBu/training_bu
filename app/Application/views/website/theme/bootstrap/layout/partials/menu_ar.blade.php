@@ -1,7 +1,7 @@
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
-        <a href="/" class="logos"><img src="/assets/img/irsc_logo.png" alt="" style="width:auto; height:70px;"></a>
+        <a href="/" class="logos"><img src="/assets/img/bu_logo2.png" alt="" style="width:auto; height:70px;"></a>
 
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>

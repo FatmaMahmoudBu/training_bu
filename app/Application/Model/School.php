@@ -15,7 +15,7 @@
   }
      protected $fillable = [
    'administration_id',
-        'name','address','administration_id'
+        'name','address','image','administration_id'
    ];
   public function getNameLangAttribute(){
   return is_json($this->name) && is_object(json_decode($this->name)) ?  json_decode($this->name)->{getCurrentLang()}  : $this->name;
