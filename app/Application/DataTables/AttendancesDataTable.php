@@ -3,7 +3,7 @@
 namespace App\Application\DataTables;
 
 use App\Application\Model\Attendance;
-use Yajra\Datatables\Services\DataTable;
+use Yajra\DataTables\Services\DataTable;use Datatables;use Illuminate\Http\JsonResponse;
 
 class AttendancesDataTable extends DataTable
 {
@@ -12,15 +12,16 @@ class AttendancesDataTable extends DataTable
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function ajax()
+    public function ajax():JsonResponse
     {
-        return $this->datatables
-             ->eloquent($this->query())
+        return
+             Datatables::of($this->query())
               ->addColumn('id', 'admin.attendance.buttons.id')
              ->addColumn('edit', 'admin.attendance.buttons.edit')
              ->addColumn('delete', 'admin.attendance.buttons.delete')
              ->addColumn('view', 'admin.attendance.buttons.view')
              /*->addColumn('name', 'admin.attendance.buttons.langcol')*/
+             ->rawColumns(['id','name', 'view', 'edit', 'delete'])
              ->make(true);
     }
     /**
@@ -131,7 +132,7 @@ class AttendancesDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename()
+    protected function filename(): string
     {
         return 'Attendancedatatables_' . time();
     }

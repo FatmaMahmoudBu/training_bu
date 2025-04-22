@@ -1,7 +1,7 @@
 
 <div class="container d-flex align-items-center">
     <a href="{{ url('/') }}" class="logos"><img src="{{ url('/') }}/assets/img/irsc_logo.png" alt="" style="width:auto; height:70px;"></a>
-    {{-- <h1 class="logo ms-auto"><a href="{{ url('/') }}"> النزاهة والشفافية </a></h1> --}}
+    <h1 class="logo"><a href="{{ url('/') }}"> {{ trans('website.siteTitle') }} </a></h1>
         <nav id="navbar" class="navbar order-last order-lg-0">
             <ul>
                 @foreach(getMenu('Website') as $admin)    

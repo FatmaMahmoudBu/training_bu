@@ -3,7 +3,7 @@
 namespace App\Application\DataTables;
 
 use App\Application\Model\Assignment;
-use Yajra\Datatables\Services\DataTable;
+use Yajra\DataTables\Services\DataTable;use Datatables;use Illuminate\Http\JsonResponse;
 
 class AssignmentsDataTable extends DataTable
 {
@@ -12,15 +12,16 @@ class AssignmentsDataTable extends DataTable
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function ajax()
+    public function ajax():JsonResponse
     {
-        return $this->datatables
-             ->eloquent($this->query())
+        return
+             Datatables::of($this->query())
               ->addColumn('id', 'admin.assignment.buttons.id')
              ->addColumn('edit', 'admin.assignment.buttons.edit')
              ->addColumn('delete', 'admin.assignment.buttons.delete')
              ->addColumn('view', 'admin.assignment.buttons.view')
              /*->addColumn('name', 'admin.assignment.buttons.langcol')*/
+             ->rawColumns(['id','name', 'view', 'edit', 'delete'])
              ->make(true);
     }
     /**
@@ -123,7 +124,7 @@ class AssignmentsDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename()
+    protected function filename(): string
     {
         return 'Assignmentdatatables_' . time();
     }

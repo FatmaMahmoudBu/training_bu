@@ -35,3 +35,17 @@ Route::get('team' , 'TeamController@index');
 #### workshop control
 Route::get('workshop' , 'WorkshopController@index');
 Route::get('workshop/{id}/view' , 'WorkshopController@getById');
+
+
+#### administration control
+Route::get('administration' , 'AdministrationController@index');
+Route::get('administration/{id}/view' , 'AdministrationController@getById');
+
+#### school control
+Route::get('school' , 'SchoolController@index');
+Route::get('school/{id}/view' , 'SchoolController@getById');
+
+#### trainee control
+Route::get('trainee' , 'TraineeController@index');
+Route::get('trainee/{id}/view' , 'TraineeController@getById');
+

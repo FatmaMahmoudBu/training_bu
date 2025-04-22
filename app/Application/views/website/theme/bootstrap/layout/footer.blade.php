@@ -31,7 +31,7 @@
             <div class="col-lg-3 col-md-3 footer-links">
                 <h4>{{trans('website.Map')}}</h4>
 
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13755.049920735857!2d31.1816293!3d30.471165!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xfcf504d1b4fd19b3!2z2KzYp9mF2LnYqSDYqNmG2YfYpw!5e0!3m2!1sar!2seg!4v1477295444689" width="200" height="150" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+                {{-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d13755.049920735857!2d31.1816293!3d30.471165!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xfcf504d1b4fd19b3!2z2KzYp9mF2LnYqSDYqNmG2YfYpw!5e0!3m2!1sar!2seg!4v1477295444689" width="200" height="150" frameborder="0" style="border:0" allowfullscreen=""></iframe> --}}
             </div><!-- End footer links column-->
 
         </div>

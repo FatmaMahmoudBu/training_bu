@@ -22,7 +22,7 @@
   </section><!-- End Hero -->  
 
   <!-- ======= About Section ======= -->
-<section id="about" class="about">
+{{-- <section id="about" class="about">
     <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -40,48 +40,8 @@
         </div>
 
     </div>
-</section><!-- End About Section -->
+</section><!-- End About Section --> --}}
 
-<!-- ======= Why Us Section ======= -->
-<section id="why-us" class="why-us">
-    <div class="container" data-aos="fade-up">
-
-        <div class="row">
-            <div class="col-lg-4 d-flex align-items-stretch">
-                <div class="content">
-                    <h3>{{trans('website.AimsVisionMission')}}</h3>
-                    <p class="text-justify"> {{trans('website.aims_vision_mission')}}</p>
-                    <div class="text-center">
-                        <a href="{{url('/page/aims_vision_mission')}}" class="more-btn">{{trans('website.more')}} <i class="bx bx-chevron-left"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-8 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-                <div class="icon-boxes d-flex flex-column justify-content-center">
-                    <div class="row">
-                        <div class="col-xl-6 d-flex align-items-stretch">
-                            <div class="icon-box mt-4 mt-xl-0">
-                                <i class="bi bi-chat-square-text"></i>
-                                <h4> {{trans('website.Vision')}} </h4>
-                                <p class="text-justify"> {{trans('website.Vision_text')}}</p>
-                            </div>
-                        </div>
-                        <div class="col-xl-6 d-flex align-items-stretch">
-                            <div class="icon-box mt-4 mt-xl-0">
-                                <i class="bi bi-eye"></i>
-                                <h4> {{trans('website.Aims')}} </h4>
-                                <p class="text-justify">
-
-                                    {{trans('website.Aims_text')}} </p>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- End .content-->
-            </div>
-        </div>
-
-    </div>
-</section><!-- End Why Us Section -->
 
 <!-- ======= Popular News Section ======= -->
 <section id="popular-courses" class="courses">
@@ -157,57 +117,6 @@
 
     </section><!-- /Trainers Index Section --> --}}
     
-    
-    <section id="about" class="about">
-        @if ($gallery->id == 1)
-        <div class="row">
-            <div class="col-lg-12 pt-4 pt-lg-0 order-2 order-lg-1 content text-justify">
-                <br stylr="clear:both;" />
-                {{-- @php
-                $gallery_id = $item->gallery_id;
-
-                $gallery = \App\Application\Model\Gallery::find($gallery_id);
-                $images = \App\Application\Model\Image::orderBy('id', 'asc')->where('gallery_id', $gallery_id)->get();
-                @endphp --}}
-
-                <!-- ======= portfolio Section ======= -->
-                <section id="portfolio" class="portfolio">
-                    <div class="container" data-aos="fade-up">
-
-                        <div class="section-title">
-                            <h2>{{ trans('gallery.gallery') }} </h2>
-                            <p>{{ getDefaultValueKey(nl2br($gallery['name'])) }} </p>
-                        </div>
-
-                        <div class="row portfolio-container aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
-                            @if (count($images) > 0)
-                            @foreach ($images as $image)
-                            <div class="col-lg-4 col-md-6 portfolio-item">
-                                <div class="portfolio-wrap">
-                                    <img src="{{ large($image->image)}}" class="img-fluid img-thumbnail" alt="">
-                                    <div class="portfolio-info">
-                                        <h4 class="pb-2"> {{ $image->title_lang}} </h4>
-                                        <p> {{ $image->description_lang}} </p>
-                                        <div class="portfolio-links pt-3">
-                                            <a href="{{ large($image->image)}}" data-gall="portfolioGallery" class="venobox" title="{{ getDefaultValueKey(nl2br($image->title)) }}"><i class="ri-add-line" aria-hidden="true"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            @endforeach
-                            @endif
-
-                        </div>
-
-                    </div>
-                </section><!-- End Courses Section -->
-            </div>
-        </div>
-        @endif
-    </div>
-
-</section>
 
 @endsection
 

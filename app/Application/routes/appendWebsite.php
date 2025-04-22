@@ -40,28 +40,28 @@ Route::get('workshop/{id}/delete' , 'WorkshopController@destroy');
 //Route::get('workshop/{id}/view' , 'WorkshopController@getById');
 
 #### administration control
-Route::get('administration' , 'AdministrationController@index');
+//Route::get('administration' , 'AdministrationController@index');
 Route::get('administration/item/{id?}' , 'AdministrationController@show');
 Route::post('administration/item' , 'AdministrationController@store');
 Route::post('administration/item/{id}' , 'AdministrationController@update');
 Route::get('administration/{id}/delete' , 'AdministrationController@destroy');
-Route::get('administration/{id}/view' , 'AdministrationController@getById');
+//Route::get('administration/{id}/view' , 'AdministrationController@getById');
 
 #### school control
-Route::get('school' , 'SchoolController@index');
+//Route::get('school' , 'SchoolController@index');
 Route::get('school/item/{id?}' , 'SchoolController@show');
 Route::post('school/item' , 'SchoolController@store');
 Route::post('school/item/{id}' , 'SchoolController@update');
 Route::get('school/{id}/delete' , 'SchoolController@destroy');
-Route::get('school/{id}/view' , 'SchoolController@getById');
+//Route::get('school/{id}/view' , 'SchoolController@getById');
 
 #### trainee control
-Route::get('trainee' , 'TraineeController@index');
+//Route::get('trainee' , 'TraineeController@index');
 Route::get('trainee/item/{id?}' , 'TraineeController@show');
 Route::post('trainee/item' , 'TraineeController@store');
 Route::post('trainee/item/{id}' , 'TraineeController@update');
 Route::get('trainee/{id}/delete' , 'TraineeController@destroy');
-Route::get('trainee/{id}/view' , 'TraineeController@getById');
+//Route::get('trainee/{id}/view' , 'TraineeController@getById');
 
 #### supervisor control
 Route::get('supervisor' , 'SupervisorController@index');
